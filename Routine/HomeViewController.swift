@@ -1,20 +1,20 @@
 //
-//  ViewController.swift
+//  HomeViewController.swift
 //  Routine
 //
-//  Created by mesird on 19/03/2017.
+//  Created by mesird on 20/03/2017.
 //  Copyright © 2017 mesird. All rights reserved.
 //
 
 import UIKit
-import RoutineModel
+import RoutineEntity
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    
+class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+
     var routines: Array<Routine> = []
     
     @IBOutlet weak var tableView: UITableView!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -22,8 +22,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         self._loadRoutines()
         NotificationCenter.default.addObserver(self, selector: #selector(self._loadRoutines), name: NSNotification.Name(rawValue: notificationRoutineCreated), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self._loadRoutines), name: NSNotification.Name(rawValue: notificationRoutineModified), object: nil)
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -32,6 +33,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
+    
+    //MARK: - table view delegate
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return routines.count
@@ -51,23 +54,32 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        
+        let routine = routines[indexPath.row]
+        let routineEditViewController: RoutineEditViewController = self.storyboard?.instantiateViewController(withIdentifier: "RoutineEditViewController") as! RoutineEditViewController
+        routineEditViewController.routineEditType = .edit
+        routineEditViewController.routine = routine
+        self.navigationController?.pushViewController(routineEditViewController, animated: true)
     }
     
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let deleteAction: UITableViewRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.destructive, title: "Delete") { (rowAction, indexPath) in
+            let routine: Routine = self.routines[indexPath.row]
+            removeLocalNotification(routine: routine)
+            self.routines.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
+            saveRoutines(routines: self.routines)
+        }
+        return [deleteAction]
+    }
+    
+    //MARK: - private methods
+    
     func _loadRoutines() {
-        let dateFormatter: DateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "hh:mm"
-        
         routines = readRoutines()
-        
-//        routines .append(Routine(name: "Sleep", start: dateFormatter.date(from: "22:00")!, end: dateFormatter.date(from: "08:00")!, needNotification: true))
-//        routines .append(Routine(name: "Washes", start: dateFormatter.date(from: "08:00")!, end: dateFormatter.date(from: "08:30")!, needNotification: true))
-//        routines .append(Routine(name: "Go to work", start: dateFormatter.date(from: "08:30")!, end: dateFormatter.date(from: "09:00")!, needNotification: true))
-//        routines .append(Routine(name: "Morning work", start: dateFormatter.date(from: "09:00")!, end: dateFormatter.date(from: "12:00")!, needNotification: true))
-//        routines .append(Routine(name: "Lunch", start: dateFormatter.date(from: "12:00")!, end: dateFormatter.date(from: "13:30")!, needNotification: true))
-//        routines .append(Routine(name: "Afternoon work", start: dateFormatter.date(from: "13:30")!, end: dateFormatter.date(from: "18:00")!, needNotification: true))
-//        routines .append(Routine(name: "Go home", start: dateFormatter.date(from: "18:00")!, end: dateFormatter.date(from: "18:30")!, needNotification: true))
-//        routines .append(Routine(name: "Study", start: dateFormatter.date(from: "18:30")!, end: dateFormatter.date(from: "22:00")!, needNotification: true))
         tableView.reloadData()
     }
     
@@ -76,5 +88,5 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         dateFormatter.dateFormat = "hh:mm"
         return "\(dateFormatter.string(from: start)) - \(dateFormatter.string(from: end))"
     }
-}
 
+}

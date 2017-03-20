@@ -8,7 +8,7 @@
 
 import UIKit
 import NotificationCenter
-import RoutineModel
+import RoutineEntity
 
 // global definitions
 let screenWidth: CGFloat  = UIScreen.main.bounds.size.width
@@ -23,9 +23,11 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         // Do any additional setup after loading the view from its nib.
         let routines: Array<Routine>? = readRoutines()
         var text: String?
+        let now: Date = Date()
         for routine in routines! {
-            let now: Date = Date()
-            if routine.start < now && routine.end > now {
+            let todayStart: Date = _dateFromString(dateText: "\(_todayDate()) \(_timeFromDate(date: routine.start))")
+            let todayEnd: Date = _dateFromString(dateText: "\(_todayDate()) \(_timeFromDate(date: routine.end))")
+            if todayStart < now && todayEnd > now {
                 text = routine.name
                 break
             }
@@ -40,7 +42,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             titleLabel?.text = "No plan now"
             titleLabel?.textColor = UIColor.white
         }
-        titleLabel?.font = UIFont.boldSystemFont(ofSize: 30)
+        titleLabel?.font = UIFont.systemFont(ofSize: 30, weight: UIFontWeightLight)
         self.view.addSubview(titleLabel!)
     }
     
@@ -57,6 +59,25 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         // If there's an update, use NCUpdateResult.NewData
         
         completionHandler(NCUpdateResult.newData)
+    }
+    
+    // functions
+    func _todayDate() -> String {
+        let dateFormatter: DateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        return dateFormatter.string(from: Date())
+    }
+    
+    func _dateFromString(dateText: String) -> Date {
+        let dateFormatter: DateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd hh:mm"
+        return dateFormatter.date(from: dateText)!
+    }
+    
+    func _timeFromDate(date: Date) -> String {
+        let dateFormatter: DateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "hh:mm"
+        return dateFormatter.string(from: date)
     }
     
 }

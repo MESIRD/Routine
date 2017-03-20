@@ -2,7 +2,7 @@
 //  Routine.swift
 //  RoutineEntity
 //
-//  Created by xujie on 3/20/17.
+//  Created by mesird on 20/03/2017.
 //  Copyright © 2017 mesird. All rights reserved.
 //
 
@@ -15,12 +15,14 @@ let userDefaultsRoutines = "UserDefaultsRoutines"
 // Routine data structure
 public class Routine: NSObject, NSCoding {
     
+    public var id: String
     public var name: String
     public var start: Date
     public var end: Date
     public var needNotification: Bool
     
     public init(name: String, start: Date, end: Date, needNotification: Bool) {
+        self.id = NSUUID().uuidString
         self.name = name
         self.start = start
         self.end = end
@@ -28,13 +30,15 @@ public class Routine: NSObject, NSCoding {
     }
     
     public required init?(coder aDecoder: NSCoder) {
+        id = aDecoder.decodeObject(forKey: "id") as! String
         name = aDecoder.decodeObject(forKey: "name") as! String
         start = aDecoder.decodeObject(forKey: "start") as! Date
         end = aDecoder.decodeObject(forKey: "end") as! Date
-        needNotification = aDecoder.decodeObject(forKey: "needNotification") as! Bool? ?? false
+        needNotification = aDecoder.decodeBool(forKey: "needNotification")
     }
     
     public func encode(with aCoder: NSCoder) {
+        aCoder.encode(id, forKey: "id")
         aCoder.encode(name, forKey: "name")
         aCoder.encode(start, forKey: "start")
         aCoder.encode(end, forKey: "end")

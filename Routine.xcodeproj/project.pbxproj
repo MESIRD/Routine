@@ -8,21 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		D72546681E7EB25C00E8E6FE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72546671E7EB25C00E8E6FE /* AppDelegate.swift */; };
-		D725466A1E7EB25C00E8E6FE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72546691E7EB25C00E8E6FE /* ViewController.swift */; };
-		D725466D1E7EB25C00E8E6FE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D725466B1E7EB25C00E8E6FE /* Main.storyboard */; };
 		D725466F1E7EB25C00E8E6FE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D725466E1E7EB25C00E8E6FE /* Assets.xcassets */; };
-		D72546721E7EB25C00E8E6FE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D72546701E7EB25C00E8E6FE /* LaunchScreen.storyboard */; };
-		D725467C1E7EBE4700E8E6FE /* AddRoutineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D725467B1E7EBE4700E8E6FE /* AddRoutineViewController.swift */; };
 		D725467F1E7ECB9F00E8E6FE /* Prefix.swift in Sources */ = {isa = PBXBuildFile; fileRef = D725467E1E7ECB9F00E8E6FE /* Prefix.swift */; };
 		D725468A1E7EDC0F00E8E6FE /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72546891E7EDC0F00E8E6FE /* TodayViewController.swift */; };
-		D725468D1E7EDC0F00E8E6FE /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D725468B1E7EDC0F00E8E6FE /* MainInterface.storyboard */; };
 		D72546911E7EDC0F00E8E6FE /* TodayRoutine.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = D72546841E7EDC0F00E8E6FE /* TodayRoutine.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		D77CB6441E80306B00CD242E /* RoutineEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D77CB6431E80306B00CD242E /* RoutineEditViewController.swift */; };
+		D77CB6461E8030BC00CD242E /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D77CB6451E8030BC00CD242E /* HomeViewController.swift */; };
+		D77CB64E1E80409600CD242E /* RoutineEntity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D77CB64D1E80409600CD242E /* RoutineEntity.framework */; };
+		D77CB64F1E80409600CD242E /* RoutineEntity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D77CB64D1E80409600CD242E /* RoutineEntity.framework */; };
+		D77CB6511E80409800CD242E /* RoutineEntity.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D77CB64D1E80409600CD242E /* RoutineEntity.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D77F8D2A1E7EE340006577A6 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D72546861E7EDC0F00E8E6FE /* NotificationCenter.framework */; };
-		F5C796E81E7F9FA500358387 /* RoutineModel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5C796E71E7F9FA500358387 /* RoutineModel.framework */; };
-		F5C796EA1E7F9FAA00358387 /* RoutineModel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5C796E91E7F9FAA00358387 /* RoutineModel.framework */; };
-		F5C796EC1E7FA03A00358387 /* RoutineModel.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F5C796E71E7F9FA500358387 /* RoutineModel.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		F5C796EE1E7FA06800358387 /* RoutineModel.framework in Resources */ = {isa = PBXBuildFile; fileRef = F5C796E71E7F9FA500358387 /* RoutineModel.framework */; };
-		F5C796EF1E7FA06F00358387 /* RoutineModel.framework in Resources */ = {isa = PBXBuildFile; fileRef = F5C796E91E7F9FAA00358387 /* RoutineModel.framework */; };
+		D7A3150A1E802CE300145249 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D725466B1E7EB25C00E8E6FE /* Main.storyboard */; };
+		D7A3150B1E802CE300145249 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D72546701E7EB25C00E8E6FE /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,13 +44,13 @@
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F5C796ED1E7FA03A00358387 /* Embed Frameworks */ = {
+		D77CB6521E80409800CD242E /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				F5C796EC1E7FA03A00358387 /* RoutineModel.framework in Embed Frameworks */,
+				D77CB6511E80409800CD242E /* RoutineEntity.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -63,23 +60,21 @@
 /* Begin PBXFileReference section */
 		D72546641E7EB25C00E8E6FE /* Routine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Routine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D72546671E7EB25C00E8E6FE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		D72546691E7EB25C00E8E6FE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		D725466C1E7EB25C00E8E6FE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D725466E1E7EB25C00E8E6FE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D72546711E7EB25C00E8E6FE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D72546731E7EB25C00E8E6FE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D725467B1E7EBE4700E8E6FE /* AddRoutineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddRoutineViewController.swift; sourceTree = "<group>"; };
 		D725467E1E7ECB9F00E8E6FE /* Prefix.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Prefix.swift; sourceTree = "<group>"; };
 		D72546841E7EDC0F00E8E6FE /* TodayRoutine.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = TodayRoutine.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		D72546861E7EDC0F00E8E6FE /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		D72546891E7EDC0F00E8E6FE /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
-		D725468C1E7EDC0F00E8E6FE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		D725468E1E7EDC0F00E8E6FE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D77CB6431E80306B00CD242E /* RoutineEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutineEditViewController.swift; sourceTree = "<group>"; };
+		D77CB6451E8030BC00CD242E /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		D77CB64D1E80409600CD242E /* RoutineEntity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RoutineEntity.framework; sourceTree = "<group>"; };
 		D77F8D2B1E7EE367006577A6 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		D77F8D2D1E7EE44A006577A6 /* Routine.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Routine.entitlements; sourceTree = "<group>"; };
 		D77F8D2E1E7EE4BE006577A6 /* TodayRoutine.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TodayRoutine.entitlements; sourceTree = "<group>"; };
-		F5C796E71E7F9FA500358387 /* RoutineModel.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RoutineModel.framework; sourceTree = "<group>"; };
-		F5C796E91E7F9FAA00358387 /* RoutineModel.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RoutineModel.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,7 +82,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F5C796E81E7F9FA500358387 /* RoutineModel.framework in Frameworks */,
+				D77CB64E1E80409600CD242E /* RoutineEntity.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -95,8 +90,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D77CB64F1E80409600CD242E /* RoutineEntity.framework in Frameworks */,
 				D77F8D2A1E7EE340006577A6 /* NotificationCenter.framework in Frameworks */,
-				F5C796EA1E7F9FAA00358387 /* RoutineModel.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -126,10 +121,9 @@
 			isa = PBXGroup;
 			children = (
 				D77F8D2D1E7EE44A006577A6 /* Routine.entitlements */,
-				F5C796E71E7F9FA500358387 /* RoutineModel.framework */,
 				D72546671E7EB25C00E8E6FE /* AppDelegate.swift */,
-				D72546691E7EB25C00E8E6FE /* ViewController.swift */,
-				D725467B1E7EBE4700E8E6FE /* AddRoutineViewController.swift */,
+				D77CB6451E8030BC00CD242E /* HomeViewController.swift */,
+				D77CB6431E80306B00CD242E /* RoutineEditViewController.swift */,
 				D725466B1E7EB25C00E8E6FE /* Main.storyboard */,
 				D725466E1E7EB25C00E8E6FE /* Assets.xcassets */,
 				D72546701E7EB25C00E8E6FE /* LaunchScreen.storyboard */,
@@ -142,6 +136,7 @@
 		D72546851E7EDC0F00E8E6FE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D77CB64D1E80409600CD242E /* RoutineEntity.framework */,
 				D77F8D2B1E7EE367006577A6 /* UIKit.framework */,
 				D72546861E7EDC0F00E8E6FE /* NotificationCenter.framework */,
 			);
@@ -152,9 +147,7 @@
 			isa = PBXGroup;
 			children = (
 				D77F8D2E1E7EE4BE006577A6 /* TodayRoutine.entitlements */,
-				F5C796E91E7F9FAA00358387 /* RoutineModel.framework */,
 				D72546891E7EDC0F00E8E6FE /* TodayViewController.swift */,
-				D725468B1E7EDC0F00E8E6FE /* MainInterface.storyboard */,
 				D725468E1E7EDC0F00E8E6FE /* Info.plist */,
 			);
 			path = TodayRoutine;
@@ -171,7 +164,7 @@
 				D72546611E7EB25C00E8E6FE /* Frameworks */,
 				D72546621E7EB25C00E8E6FE /* Resources */,
 				D72546951E7EDC0F00E8E6FE /* Embed App Extensions */,
-				F5C796ED1E7FA03A00358387 /* Embed Frameworks */,
+				D77CB6521E80409800CD242E /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -218,6 +211,9 @@
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
 							};
+							com.apple.Push = {
+								enabled = 1;
+							};
 						};
 					};
 					D72546831E7EDC0F00E8E6FE = {
@@ -256,10 +252,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F5C796EE1E7FA06800358387 /* RoutineModel.framework in Resources */,
-				D72546721E7EB25C00E8E6FE /* LaunchScreen.storyboard in Resources */,
+				D7A3150A1E802CE300145249 /* Main.storyboard in Resources */,
+				D7A3150B1E802CE300145249 /* LaunchScreen.storyboard in Resources */,
 				D725466F1E7EB25C00E8E6FE /* Assets.xcassets in Resources */,
-				D725466D1E7EB25C00E8E6FE /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -267,8 +262,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F5C796EF1E7FA06F00358387 /* RoutineModel.framework in Resources */,
-				D725468D1E7EDC0F00E8E6FE /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -279,9 +272,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D725466A1E7EB25C00E8E6FE /* ViewController.swift in Sources */,
 				D725467F1E7ECB9F00E8E6FE /* Prefix.swift in Sources */,
-				D725467C1E7EBE4700E8E6FE /* AddRoutineViewController.swift in Sources */,
+				D77CB6461E8030BC00CD242E /* HomeViewController.swift in Sources */,
+				D77CB6441E80306B00CD242E /* RoutineEditViewController.swift in Sources */,
 				D72546681E7EB25C00E8E6FE /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -319,14 +312,6 @@
 				D72546711E7EB25C00E8E6FE /* Base */,
 			);
 			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-		D725468B1E7EDC0F00E8E6FE /* MainInterface.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D725468C1E7EDC0F00E8E6FE /* Base */,
-			);
-			name = MainInterface.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -433,9 +418,11 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Routine",
+					"$(PROJECT_DIR)",
 				);
 				GCC_PREFIX_HEADER = $SRCROOT/Routine/Prefix.swift;
 				INFOPLIST_FILE = Routine/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mesird.Routine;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -453,9 +440,11 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Routine",
+					"$(PROJECT_DIR)",
 				);
 				GCC_PREFIX_HEADER = $SRCROOT/Routine/Prefix.swift;
 				INFOPLIST_FILE = Routine/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mesird.Routine;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -472,8 +461,10 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/TodayRoutine",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = TodayRoutine/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mesird.Routine.TodayRoutine;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -491,8 +482,10 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/TodayRoutine",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = TodayRoutine/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mesird.Routine.TodayRoutine;
 				PRODUCT_NAME = "$(TARGET_NAME)";

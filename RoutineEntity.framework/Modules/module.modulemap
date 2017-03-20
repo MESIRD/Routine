@@ -1,0 +1,10 @@
+framework module RoutineEntity {
+  umbrella header "RoutineEntity.h"
+
+  export *
+  module * { export * }
+}
+
+module RoutineEntity.Swift {
+    header "RoutineEntity-Swift.h"
+}

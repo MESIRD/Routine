@@ -123,8 +123,9 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #pragma clang diagnostic ignored "-Wduplicate-method-arg"
 @class NSCoder;
 
-SWIFT_CLASS("_TtC12RoutineModel7Routine")
+SWIFT_CLASS("_TtC13RoutineEntity7Routine")
 @interface Routine : NSObject <NSCoding>
+@property (nonatomic, copy) NSString * _Nonnull id;
 @property (nonatomic, copy) NSString * _Nonnull name;
 @property (nonatomic, copy) NSDate * _Nonnull start;
 @property (nonatomic, copy) NSDate * _Nonnull end;
