@@ -8,5 +8,6 @@ a simple iOS application to plan your daily routine
 
 ## Installation
 Download this source code and change Team Id/ Bundle Id in Xcode
+> note: this app is using Local Notification/ App Group
 
 
