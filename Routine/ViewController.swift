@@ -7,8 +7,7 @@
 //
 
 import UIKit
-
-
+import RoutineModel
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     

@@ -17,8 +17,12 @@
 		D725468A1E7EDC0F00E8E6FE /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72546891E7EDC0F00E8E6FE /* TodayViewController.swift */; };
 		D725468D1E7EDC0F00E8E6FE /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D725468B1E7EDC0F00E8E6FE /* MainInterface.storyboard */; };
 		D72546911E7EDC0F00E8E6FE /* TodayRoutine.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = D72546841E7EDC0F00E8E6FE /* TodayRoutine.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		D72546971E7EDEFC00E8E6FE /* Routine.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72546961E7EDEFC00E8E6FE /* Routine.swift */; };
 		D77F8D2A1E7EE340006577A6 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D72546861E7EDC0F00E8E6FE /* NotificationCenter.framework */; };
+		F5C796E81E7F9FA500358387 /* RoutineModel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5C796E71E7F9FA500358387 /* RoutineModel.framework */; };
+		F5C796EA1E7F9FAA00358387 /* RoutineModel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5C796E91E7F9FAA00358387 /* RoutineModel.framework */; };
+		F5C796EC1E7FA03A00358387 /* RoutineModel.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F5C796E71E7F9FA500358387 /* RoutineModel.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F5C796EE1E7FA06800358387 /* RoutineModel.framework in Resources */ = {isa = PBXBuildFile; fileRef = F5C796E71E7F9FA500358387 /* RoutineModel.framework */; };
+		F5C796EF1E7FA06F00358387 /* RoutineModel.framework in Resources */ = {isa = PBXBuildFile; fileRef = F5C796E91E7F9FAA00358387 /* RoutineModel.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +47,17 @@
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F5C796ED1E7FA03A00358387 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				F5C796EC1E7FA03A00358387 /* RoutineModel.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -60,10 +75,11 @@
 		D72546891E7EDC0F00E8E6FE /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
 		D725468C1E7EDC0F00E8E6FE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		D725468E1E7EDC0F00E8E6FE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D72546961E7EDEFC00E8E6FE /* Routine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Routine.swift; sourceTree = "<group>"; };
 		D77F8D2B1E7EE367006577A6 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		D77F8D2D1E7EE44A006577A6 /* Routine.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Routine.entitlements; sourceTree = "<group>"; };
 		D77F8D2E1E7EE4BE006577A6 /* TodayRoutine.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TodayRoutine.entitlements; sourceTree = "<group>"; };
+		F5C796E71E7F9FA500358387 /* RoutineModel.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RoutineModel.framework; sourceTree = "<group>"; };
+		F5C796E91E7F9FAA00358387 /* RoutineModel.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RoutineModel.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +87,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F5C796E81E7F9FA500358387 /* RoutineModel.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -79,6 +96,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D77F8D2A1E7EE340006577A6 /* NotificationCenter.framework in Frameworks */,
+				F5C796EA1E7F9FAA00358387 /* RoutineModel.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -108,6 +126,7 @@
 			isa = PBXGroup;
 			children = (
 				D77F8D2D1E7EE44A006577A6 /* Routine.entitlements */,
+				F5C796E71E7F9FA500358387 /* RoutineModel.framework */,
 				D72546671E7EB25C00E8E6FE /* AppDelegate.swift */,
 				D72546691E7EB25C00E8E6FE /* ViewController.swift */,
 				D725467B1E7EBE4700E8E6FE /* AddRoutineViewController.swift */,
@@ -133,7 +152,7 @@
 			isa = PBXGroup;
 			children = (
 				D77F8D2E1E7EE4BE006577A6 /* TodayRoutine.entitlements */,
-				D72546961E7EDEFC00E8E6FE /* Routine.swift */,
+				F5C796E91E7F9FAA00358387 /* RoutineModel.framework */,
 				D72546891E7EDC0F00E8E6FE /* TodayViewController.swift */,
 				D725468B1E7EDC0F00E8E6FE /* MainInterface.storyboard */,
 				D725468E1E7EDC0F00E8E6FE /* Info.plist */,
@@ -152,6 +171,7 @@
 				D72546611E7EB25C00E8E6FE /* Frameworks */,
 				D72546621E7EB25C00E8E6FE /* Resources */,
 				D72546951E7EDC0F00E8E6FE /* Embed App Extensions */,
+				F5C796ED1E7FA03A00358387 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -236,6 +256,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F5C796EE1E7FA06800358387 /* RoutineModel.framework in Resources */,
 				D72546721E7EB25C00E8E6FE /* LaunchScreen.storyboard in Resources */,
 				D725466F1E7EB25C00E8E6FE /* Assets.xcassets in Resources */,
 				D725466D1E7EB25C00E8E6FE /* Main.storyboard in Resources */,
@@ -246,6 +267,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F5C796EF1E7FA06F00358387 /* RoutineModel.framework in Resources */,
 				D725468D1E7EDC0F00E8E6FE /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -268,7 +290,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D72546971E7EDEFC00E8E6FE /* Routine.swift in Sources */,
 				D725468A1E7EDC0F00E8E6FE /* TodayViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -409,6 +430,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Routine/Routine.entitlements;
 				DEVELOPMENT_TEAM = CYRHEAA262;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Routine",
+				);
 				GCC_PREFIX_HEADER = $SRCROOT/Routine/Prefix.swift;
 				INFOPLIST_FILE = Routine/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -425,6 +450,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Routine/Routine.entitlements;
 				DEVELOPMENT_TEAM = CYRHEAA262;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Routine",
+				);
 				GCC_PREFIX_HEADER = $SRCROOT/Routine/Prefix.swift;
 				INFOPLIST_FILE = Routine/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -437,8 +466,13 @@
 		D72546931E7EDC0F00E8E6FE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_ENTITLEMENTS = TodayRoutine/TodayRoutine.entitlements;
 				DEVELOPMENT_TEAM = CYRHEAA262;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/TodayRoutine",
+				);
 				INFOPLIST_FILE = TodayRoutine/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mesird.Routine.TodayRoutine;
@@ -451,8 +485,13 @@
 		D72546941E7EDC0F00E8E6FE /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_ENTITLEMENTS = TodayRoutine/TodayRoutine.entitlements;
 				DEVELOPMENT_TEAM = CYRHEAA262;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/TodayRoutine",
+				);
 				INFOPLIST_FILE = TodayRoutine/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mesird.Routine.TodayRoutine;

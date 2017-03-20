@@ -1,8 +1,8 @@
 //
 //  Routine.swift
-//  Routine
+//  RoutineEntity
 //
-//  Created by mesird on 19/03/2017.
+//  Created by xujie on 3/20/17.
 //  Copyright © 2017 mesird. All rights reserved.
 //
 
@@ -12,24 +12,22 @@ let appGroupId: String = "group.com.mesird.Routine"
 
 let userDefaultsRoutines = "UserDefaultsRoutines"
 
-let notificationRoutineCreated = "NotificationRoutineCreated"
-
 // Routine data structure
 public class Routine: NSObject, NSCoding {
     
-    var name: String
-    var start: Date
-    var end: Date
-    var needNotification: Bool
+    public var name: String
+    public var start: Date
+    public var end: Date
+    public var needNotification: Bool
     
-    init(name: String, start: Date, end: Date, needNotification: Bool) {
+    public init(name: String, start: Date, end: Date, needNotification: Bool) {
         self.name = name
         self.start = start
         self.end = end
         self.needNotification = needNotification
     }
     
-    required public init?(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
         name = aDecoder.decodeObject(forKey: "name") as! String
         start = aDecoder.decodeObject(forKey: "start") as! Date
         end = aDecoder.decodeObject(forKey: "end") as! Date
