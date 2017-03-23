@@ -12,6 +12,11 @@
 		D725467F1E7ECB9F00E8E6FE /* Prefix.swift in Sources */ = {isa = PBXBuildFile; fileRef = D725467E1E7ECB9F00E8E6FE /* Prefix.swift */; };
 		D725468A1E7EDC0F00E8E6FE /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72546891E7EDC0F00E8E6FE /* TodayViewController.swift */; };
 		D72546911E7EDC0F00E8E6FE /* TodayRoutine.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = D72546841E7EDC0F00E8E6FE /* TodayRoutine.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		D750B6601E8411A500941AB4 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D750B65F1E8411A500941AB4 /* MainViewController.swift */; };
+		D750B6621E8412DC00941AB4 /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D750B6611E8412DC00941AB4 /* MainTableViewCell.swift */; };
+		D750B6641E8416FF00941AB4 /* RoutineWeekday.swift in Sources */ = {isa = PBXBuildFile; fileRef = D750B6631E8416FF00941AB4 /* RoutineWeekday.swift */; };
+		D750B6681E84271A00941AB4 /* WeekdayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D750B6671E84271A00941AB4 /* WeekdayViewController.swift */; };
+		D750B66A1E84287E00941AB4 /* MainViewControllerAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D750B6691E84287E00941AB4 /* MainViewControllerAnimator.swift */; };
 		D77CB6441E80306B00CD242E /* RoutineEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D77CB6431E80306B00CD242E /* RoutineEditViewController.swift */; };
 		D77CB6461E8030BC00CD242E /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D77CB6451E8030BC00CD242E /* HomeViewController.swift */; };
 		D77CB64E1E80409600CD242E /* RoutineEntity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D77CB64D1E80409600CD242E /* RoutineEntity.framework */; };
@@ -69,6 +74,11 @@
 		D72546861E7EDC0F00E8E6FE /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		D72546891E7EDC0F00E8E6FE /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
 		D725468E1E7EDC0F00E8E6FE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D750B65F1E8411A500941AB4 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		D750B6611E8412DC00941AB4 /* MainTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTableViewCell.swift; sourceTree = "<group>"; };
+		D750B6631E8416FF00941AB4 /* RoutineWeekday.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutineWeekday.swift; sourceTree = "<group>"; };
+		D750B6671E84271A00941AB4 /* WeekdayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeekdayViewController.swift; sourceTree = "<group>"; };
+		D750B6691E84287E00941AB4 /* MainViewControllerAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewControllerAnimator.swift; sourceTree = "<group>"; };
 		D77CB6431E80306B00CD242E /* RoutineEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutineEditViewController.swift; sourceTree = "<group>"; };
 		D77CB6451E8030BC00CD242E /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		D77CB64D1E80409600CD242E /* RoutineEntity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RoutineEntity.framework; sourceTree = "<group>"; };
@@ -122,13 +132,18 @@
 			children = (
 				D77F8D2D1E7EE44A006577A6 /* Routine.entitlements */,
 				D72546671E7EB25C00E8E6FE /* AppDelegate.swift */,
+				D750B65F1E8411A500941AB4 /* MainViewController.swift */,
+				D750B6611E8412DC00941AB4 /* MainTableViewCell.swift */,
+				D750B6691E84287E00941AB4 /* MainViewControllerAnimator.swift */,
+				D750B6671E84271A00941AB4 /* WeekdayViewController.swift */,
+				D725466B1E7EB25C00E8E6FE /* Main.storyboard */,
+				D72546701E7EB25C00E8E6FE /* LaunchScreen.storyboard */,
+				D725466E1E7EB25C00E8E6FE /* Assets.xcassets */,
 				D77CB6451E8030BC00CD242E /* HomeViewController.swift */,
 				D77CB6431E80306B00CD242E /* RoutineEditViewController.swift */,
-				D725466B1E7EB25C00E8E6FE /* Main.storyboard */,
-				D725466E1E7EB25C00E8E6FE /* Assets.xcassets */,
-				D72546701E7EB25C00E8E6FE /* LaunchScreen.storyboard */,
 				D72546731E7EB25C00E8E6FE /* Info.plist */,
 				D725467E1E7ECB9F00E8E6FE /* Prefix.swift */,
+				D750B6631E8416FF00941AB4 /* RoutineWeekday.swift */,
 			);
 			path = Routine;
 			sourceTree = "<group>";
@@ -274,8 +289,13 @@
 			files = (
 				D725467F1E7ECB9F00E8E6FE /* Prefix.swift in Sources */,
 				D77CB6461E8030BC00CD242E /* HomeViewController.swift in Sources */,
+				D750B66A1E84287E00941AB4 /* MainViewControllerAnimator.swift in Sources */,
 				D77CB6441E80306B00CD242E /* RoutineEditViewController.swift in Sources */,
 				D72546681E7EB25C00E8E6FE /* AppDelegate.swift in Sources */,
+				D750B6621E8412DC00941AB4 /* MainTableViewCell.swift in Sources */,
+				D750B6681E84271A00941AB4 /* WeekdayViewController.swift in Sources */,
+				D750B6641E8416FF00941AB4 /* RoutineWeekday.swift in Sources */,
+				D750B6601E8411A500941AB4 /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

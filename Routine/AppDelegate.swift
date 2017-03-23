@@ -17,9 +17,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
+        // increase loading time
+        Thread.sleep(forTimeInterval: 1)
+        
         // register local notification
         application.registerUserNotificationSettings(UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil))
         
+        // show main view controller
+        let mainViewController = MainViewController()
+        window!.rootViewController = mainViewController
+        window!.makeKeyAndVisible()
         
         return true
     }
