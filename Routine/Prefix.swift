@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import RoutineEntity
 
 // global definitions
 let screenWidth: CGFloat  = UIScreen.main.bounds.size.width

@@ -8,7 +8,6 @@
 
 import UIKit
 import NotificationCenter
-import RoutineEntity
 
 // global definitions
 let screenWidth: CGFloat  = UIScreen.main.bounds.size.width

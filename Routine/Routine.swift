@@ -1,8 +1,8 @@
 //
 //  Routine.swift
-//  RoutineEntity
+//  Routine
 //
-//  Created by mesird on 20/03/2017.
+//  Created by xujie on 3/24/17.
 //  Copyright © 2017 mesird. All rights reserved.
 //
 

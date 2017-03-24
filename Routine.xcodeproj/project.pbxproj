@@ -19,12 +19,11 @@
 		D750B66A1E84287E00941AB4 /* MainViewControllerAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D750B6691E84287E00941AB4 /* MainViewControllerAnimator.swift */; };
 		D77CB6441E80306B00CD242E /* RoutineEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D77CB6431E80306B00CD242E /* RoutineEditViewController.swift */; };
 		D77CB6461E8030BC00CD242E /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D77CB6451E8030BC00CD242E /* HomeViewController.swift */; };
-		D77CB64E1E80409600CD242E /* RoutineEntity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D77CB64D1E80409600CD242E /* RoutineEntity.framework */; };
-		D77CB64F1E80409600CD242E /* RoutineEntity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D77CB64D1E80409600CD242E /* RoutineEntity.framework */; };
-		D77CB6511E80409800CD242E /* RoutineEntity.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D77CB64D1E80409600CD242E /* RoutineEntity.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D77F8D2A1E7EE340006577A6 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D72546861E7EDC0F00E8E6FE /* NotificationCenter.framework */; };
 		D7A3150A1E802CE300145249 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D725466B1E7EB25C00E8E6FE /* Main.storyboard */; };
 		D7A3150B1E802CE300145249 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D72546701E7EB25C00E8E6FE /* LaunchScreen.storyboard */; };
+		F558761D1E84DC4700A4AB7F /* Routine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F558761C1E84DC4700A4AB7F /* Routine.swift */; };
+		F558761E1E84DC4700A4AB7F /* Routine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F558761C1E84DC4700A4AB7F /* Routine.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,17 +48,6 @@
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D77CB6521E80409800CD242E /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				D77CB6511E80409800CD242E /* RoutineEntity.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -81,10 +69,10 @@
 		D750B6691E84287E00941AB4 /* MainViewControllerAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewControllerAnimator.swift; sourceTree = "<group>"; };
 		D77CB6431E80306B00CD242E /* RoutineEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutineEditViewController.swift; sourceTree = "<group>"; };
 		D77CB6451E8030BC00CD242E /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		D77CB64D1E80409600CD242E /* RoutineEntity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RoutineEntity.framework; sourceTree = "<group>"; };
 		D77F8D2B1E7EE367006577A6 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		D77F8D2D1E7EE44A006577A6 /* Routine.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Routine.entitlements; sourceTree = "<group>"; };
 		D77F8D2E1E7EE4BE006577A6 /* TodayRoutine.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TodayRoutine.entitlements; sourceTree = "<group>"; };
+		F558761C1E84DC4700A4AB7F /* Routine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Routine.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,7 +80,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D77CB64E1E80409600CD242E /* RoutineEntity.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -100,7 +87,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D77CB64F1E80409600CD242E /* RoutineEntity.framework in Frameworks */,
 				D77F8D2A1E7EE340006577A6 /* NotificationCenter.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -144,6 +130,7 @@
 				D72546731E7EB25C00E8E6FE /* Info.plist */,
 				D725467E1E7ECB9F00E8E6FE /* Prefix.swift */,
 				D750B6631E8416FF00941AB4 /* RoutineWeekday.swift */,
+				F558761C1E84DC4700A4AB7F /* Routine.swift */,
 			);
 			path = Routine;
 			sourceTree = "<group>";
@@ -151,7 +138,6 @@
 		D72546851E7EDC0F00E8E6FE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				D77CB64D1E80409600CD242E /* RoutineEntity.framework */,
 				D77F8D2B1E7EE367006577A6 /* UIKit.framework */,
 				D72546861E7EDC0F00E8E6FE /* NotificationCenter.framework */,
 			);
@@ -179,7 +165,6 @@
 				D72546611E7EB25C00E8E6FE /* Frameworks */,
 				D72546621E7EB25C00E8E6FE /* Resources */,
 				D72546951E7EDC0F00E8E6FE /* Embed App Extensions */,
-				D77CB6521E80409800CD242E /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -287,6 +272,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F558761D1E84DC4700A4AB7F /* Routine.swift in Sources */,
 				D725467F1E7ECB9F00E8E6FE /* Prefix.swift in Sources */,
 				D77CB6461E8030BC00CD242E /* HomeViewController.swift in Sources */,
 				D750B66A1E84287E00941AB4 /* MainViewControllerAnimator.swift in Sources */,
@@ -303,6 +289,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F558761E1E84DC4700A4AB7F /* Routine.swift in Sources */,
 				D725468A1E7EDC0F00E8E6FE /* TodayViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

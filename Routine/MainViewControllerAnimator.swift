@@ -37,7 +37,7 @@ class MainViewControllerAnimator: NSObject, UIViewControllerAnimatedTransitionin
             
             let beginPath = UIBezierPath(roundedRect: startFrame!, cornerRadius: 8)
             let endPath = UIBezierPath(roundedRect: UIScreen.main.bounds, cornerRadius: 0.01)
-            
+            maskLayer.frame = (toVC?.view.frame)!
             maskLayer.path = beginPath.cgPath
             
             let maskAnimation = CABasicAnimation(keyPath: "path")
@@ -47,8 +47,6 @@ class MainViewControllerAnimator: NSObject, UIViewControllerAnimatedTransitionin
             maskAnimation.delegate = self
             maskAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
             
-            
-            
             let blackView: UIView = UIView(frame: (fromVC?.view.bounds)!)
             blackView.backgroundColor = UIColor.black
             blackView.alpha = 0
@@ -57,23 +55,14 @@ class MainViewControllerAnimator: NSObject, UIViewControllerAnimatedTransitionin
             
             // first animation
             toVC?.view.alpha = 0
-            
-            UIView.animate(withDuration: 0.5, animations: {
+            UIView.animate(withDuration: 0.3, animations: {
                 toVC?.view.alpha = 1
                 blackView.alpha = 0.5
                 fromVC?.view.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
             }, completion: { (finish: Bool) in
+                maskLayer.path = endPath.cgPath
                 maskLayer.add(maskAnimation, forKey: "path")
             })
-            
-            
-            
-            
-//            UIView.animate(withDuration: 0.5, animations: { 
-//                maskLayer.path = endPath.cgPath
-//            }, completion: { (finish: Bool) in
-//                transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
-//            })
         } else {
             // dismiss current view controller
             // TODO

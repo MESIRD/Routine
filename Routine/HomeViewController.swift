@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import RoutineEntity
 
 class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
