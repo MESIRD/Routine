@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         // increase loading time
-        Thread.sleep(forTimeInterval: 1)
+//        Thread.sleep(forTimeInterval: 1)
         
         // register local notification
         application.registerUserNotificationSettings(UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil))

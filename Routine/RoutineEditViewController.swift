@@ -18,7 +18,7 @@ enum RoutineEditType {
 
 class RoutineEditViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
 
-    @IBOutlet weak var tableView: UITableView!
+    weak var tableView: UITableView!
     
     public var routine: Routine?
     
@@ -33,6 +33,21 @@ class RoutineEditViewController: UIViewController, UITableViewDelegate, UITableV
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        tableView = UITableView(frame: CGRect(x: 0, y: 80, width: screenWidth, height: screenHeight - 80) , style: .plain)
+        tableView!.dataSource = self
+        tableView!.delegate = self
+        tableView!.separatorColor = color(with: 231, green: 231, blue: 231)
+        tableView!.backgroundColor = UIColor.white
+        tableView!.keyboardDismissMode = .onDrag
+        tableView!.tableFooterView = UIView()
+        tableView!.register(<#T##cellClass: AnyClass?##AnyClass?#>, forCellReuseIdentifier: <#T##String#>)
+        backView!.addSubview(tableView!)
+        
+        
+        
+        
+        
         tableView.tableFooterView = UIView(frame: CGRect.zero)
         
         if routine == nil {

@@ -38,6 +38,9 @@ class MainTableViewCell: UITableViewCell {
         detailLabel!.textColor = UIColor(red: 98/255, green: 98/255, blue: 98/255, alpha: 1)
         detailLabel!.textAlignment = NSTextAlignment.right
         backView!.addSubview(detailLabel!)
+        
+//        let tapGestureRecognizer: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self._tapOnBackView))
+//        backView!.addGestureRecognizer(tapGestureRecognizer)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -49,5 +52,27 @@ class MainTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    
+    func _tapOnBackView(gestureRecognizer: UITapGestureRecognizer) {
+        if gestureRecognizer.state == UIGestureRecognizerState.began {
+            self.displayPressAnimation()
+        } else if gestureRecognizer.state == UIGestureRecognizerState.ended {
+            self.displayReleaseAnimation()
+        }
+    }
+    
 
+    func displayPressAnimation() {
+        UIView.animate(withDuration: 0.1) {
+            self.backView?.alpha = 0.8
+            self.backView?.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+        }
+    }
+    
+    func displayReleaseAnimation() {
+        UIView.animate(withDuration: 0.1) {
+            self.backView?.alpha = 1
+            self.backView?.transform = CGAffineTransform(scaleX: 1, y: 1)
+        }
+    }
 }

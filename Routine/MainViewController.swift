@@ -10,7 +10,7 @@ import UIKit
 
 class MainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIViewControllerTransitioningDelegate {
     
-    var tableView: UITableView?
+    var tableView: MainTableView?
     var weekdays: Array<RoutineWeekday>? = []
     var animator: MainViewControllerAnimator = MainViewControllerAnimator()
     
@@ -28,25 +28,38 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        let tableHeaderLabel = UILabel(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 120))
+        tableHeaderLabel.textColor = UIColor(red: 98/255, green: 98/255, blue: 98/255, alpha: 1)
+        tableHeaderLabel.font = UIFont.systemFont(ofSize: 24, weight: UIFontWeightLight)
+        tableHeaderLabel.text = "Weekdays"
+        tableHeaderLabel.textAlignment = .center
         
-        self._loadWeekdays()
-        
-        
-        tableView = UITableView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: screenHeight) , style: UITableViewStyle.plain)
+        tableView = MainTableView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: screenHeight) , style: UITableViewStyle.plain)
         tableView!.dataSource = self
         tableView!.delegate = self
         tableView!.separatorStyle = UITableViewCellSeparatorStyle.none
-        tableView!.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 50))
+        tableView!.tableHeaderView = tableHeaderLabel
         tableView!.register(MainTableViewCell.self, forCellReuseIdentifier: MainViewController.kMainCellId)
         self.view.addSubview(tableView!)
         
-        //
+        self._loadWeekdays()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    func _animatedReload() {
+        tableView!.reloadData()
+        let visibleCells = tableView!.visibleCells
+        for i in 0..<visibleCells.count {
+            let indexPath = IndexPath(row: i, section: 0)
+            tableView!.reloadRows(at: [indexPath], with: .automatic)
+        }
+    }
+    
+    //MARK: - Table View Delegate
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -71,18 +84,20 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("press on cell")
         var cellFrame: CGRect = tableView.rectForRow(at: indexPath)
         cellFrame.size.width  -= 30
         cellFrame.size.height -= 10
         cellFrame.origin.x = 15
         let weekdayViewController = WeekdayViewController()
         weekdayViewController.transitioningDelegate = self
+        weekdayViewController.routineWeekday = weekdays![indexPath.row]
         animator.startFrame = cellFrame
         DispatchQueue.main.async {
             self.present(weekdayViewController, animated: true, completion: nil)
         }
     }
+    
+    //MARK: - Private Method
     
     func _loadWeekdays() {
         weekdays?.append(RoutineWeekday(name: "Monday", blockColor: UIColor(red: 255/255, green: 225/255, blue: 210/255, alpha: 1), routines: [], bIsToday: false))
@@ -92,9 +107,12 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         weekdays?.append(RoutineWeekday(name: "Friday", blockColor: UIColor(red: 210/255, green: 255/255, blue: 248/255, alpha: 1), routines: [], bIsToday: false))
         weekdays?.append(RoutineWeekday(name: "Saturday", blockColor: UIColor(red: 210/255, green: 232/255, blue: 255/255, alpha: 1), routines: [], bIsToday: false))
         weekdays?.append(RoutineWeekday(name: "Sunday", blockColor: UIColor(red: 214/255, green: 210/255, blue: 255/255, alpha: 1), routines: [], bIsToday: false))
+        
+        self._animatedReload()
     }
     
     //MARK: - UIViewControllerTransitioningDelegate
+    
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         print("return an animator")
         animator.animatorType = .present

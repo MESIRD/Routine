@@ -12,6 +12,8 @@ import UIKit
 let screenWidth: CGFloat  = UIScreen.main.bounds.size.width
 let screenHeight: CGFloat = UIScreen.main.bounds.size.height
 
+let onePixel: CGFloat = 1 / UIScreen.main.scale
+
 // notification
 let notificationRoutineCreated  = "NotificationRoutineCreated"
 let notificationRoutineModified = "NotificationRoutineModified"
@@ -33,6 +35,10 @@ func timeFromDate(date: Date) -> String {
     let dateFormatter: DateFormatter = DateFormatter()
     dateFormatter.dateFormat = "hh:mm"
     return dateFormatter.string(from: date)
+}
+
+func color(with red: UInt8, green: UInt8, blue: UInt8) -> UIColor {
+    return UIColor(red: CGFloat(Double(red) * 1.0/255), green: CGFloat(Double(green) * 1.0/255), blue: CGFloat(Double(blue) * 1.0/255), alpha: 1)
 }
 
 // notification
