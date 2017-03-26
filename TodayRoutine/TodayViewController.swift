@@ -20,29 +20,29 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view from its nib.
-        let routines: Array<Routine>? = readRoutines()
-        var text: String?
-        let now: Date = Date()
-        for routine in routines! {
-            let todayStart: Date = _dateFromString(dateText: "\(_todayDate()) \(_timeFromDate(date: routine.start))")
-            let todayEnd: Date = _dateFromString(dateText: "\(_todayDate()) \(_timeFromDate(date: routine.end))")
-            if todayStart < now && todayEnd > now {
-                text = routine.name
-                break
-            }
-        }
-        
-        titleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: screenWidth - 20, height: 90))
-        titleLabel?.textAlignment = NSTextAlignment.center
-        if text != nil {
-            titleLabel?.text = text
-            titleLabel?.textColor = UIColor.darkGray
-        } else {
-            titleLabel?.text = "No plan now"
-            titleLabel?.textColor = UIColor.white
-        }
-        titleLabel?.font = UIFont.systemFont(ofSize: 30, weight: UIFontWeightLight)
-        self.view.addSubview(titleLabel!)
+//        let routines: Array<Routine>? = readRoutines()
+//        var text: String?
+//        let now: Date = Date()
+//        for routine in routines! {
+//            let todayStart: Date = _dateFromString(dateText: "\(_todayDate()) \(_timeFromDate(date: routine.start))")
+//            let todayEnd: Date = _dateFromString(dateText: "\(_todayDate()) \(_timeFromDate(date: routine.end))")
+//            if todayStart < now && todayEnd > now {
+//                text = routine.name
+//                break
+//            }
+//        }
+//        
+//        titleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: screenWidth - 20, height: 90))
+//        titleLabel?.textAlignment = NSTextAlignment.center
+//        if text != nil {
+//            titleLabel?.text = text
+//            titleLabel?.textColor = UIColor.darkGray
+//        } else {
+//            titleLabel?.text = "No plan now"
+//            titleLabel?.textColor = UIColor.white
+//        }
+//        titleLabel?.font = UIFont.systemFont(ofSize: 30, weight: UIFontWeightLight)
+//        self.view.addSubview(titleLabel!)
     }
     
     override func didReceiveMemoryWarning() {

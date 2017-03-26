@@ -10,29 +10,37 @@ import UIKit
 
 class RoutineWeekday: NSObject, NSCoding {
     
-    public var name: String?
-    public var blockColor: UIColor?
-    public var routines: Array<Routine>?
-    public var bIsToday: Bool?
+    var id: String?
+    var name: String?
+    var blockColor: UIColor?
+    var routines: Array<Routine>?
+    var bIsToday: Bool?
+    var bNeedNotification: Bool?
     
-    public init(name: String, blockColor: UIColor, routines: Array<Routine>, bIsToday: Bool) {
+    init(name: String, blockColor: UIColor, routines: Array<Routine>, bIsToday: Bool) {
+        self.id = UUID().uuidString
         self.name = name
         self.blockColor = blockColor
         self.routines = routines
         self.bIsToday = bIsToday
+        self.bNeedNotification = false
     }
     
-    public required init?(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
+        id = aDecoder.decodeObject(forKey: "id") as! String?
         name = aDecoder.decodeObject(forKey: "name") as! String?
         blockColor = aDecoder.decodeObject(forKey: "blockColor") as! UIColor?
         routines = aDecoder.decodeObject(forKey: "routines") as! Array<Routine>?
         bIsToday = aDecoder.decodeBool(forKey: "bIsToday")
+        bNeedNotification = aDecoder.decodeBool(forKey: "bNeedNotification")
     }
     
-    public func encode(with aCoder: NSCoder) {
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(id, forKey: "id")
         aCoder.encode(name, forKey: "name")
         aCoder.encode(blockColor, forKey: "blockColor")
         aCoder.encode(routines, forKey: "routines")
-        aCoder.encode(bIsToday, forKey: "bIsToday")
+        aCoder.encode(bIsToday!, forKey: "bIsToday")
+        aCoder.encode(bNeedNotification!, forKey: "bNeedNotification")
     }
 }

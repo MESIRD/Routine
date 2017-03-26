@@ -8,12 +8,13 @@
 
 import UIKit
 
-class WeekdayViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, WeekdayColorProtocol, UIViewControllerTransitioningDelegate {
+class WeekdayViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, WeekdayColorProtocol, UIViewControllerTransitioningDelegate, RoutineEditProtocol {
     
     var backView: UIView?
     var tableView: UITableView?
     var doneButton: UIButton?
     var cancelButton: UIButton?
+    var titleLabel: UILabel?
     var blurView: UIVisualEffectView?
     var colorSelectView: WeekdayColorSelectView?
     
@@ -21,11 +22,11 @@ class WeekdayViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     var animator: MainViewControllerAnimator = MainViewControllerAnimator()
     
-    let kWeekdayTextCellId = "WeekdayTextCell"
-    let kWeekdayColorCellId = "WeekdayColorCell"
-    let kWeekdaySelectCellId = "WeekdaySelectCell"
+    let kWeekdayTextCellId    = "WeekdayTextCell"
+    let kWeekdayColorCellId   = "WeekdayColorCell"
+    let kWeekdaySelectCellId  = "WeekdaySelectCell"
     let kWeekdayRoutineCellId = "WeekdayRoutineCell"
-    let kWeekdayAddOneCellId = "WeekdayAddOneCell"
+    let kWeekdayAddOneCellId  = "WeekdayAddOneCell"
     
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -44,6 +45,13 @@ class WeekdayViewController: UIViewController, UITableViewDelegate, UITableViewD
         backView = UIView(frame: UIScreen.main.bounds)
         backView!.alpha = 0
         self.view.addSubview(backView!)
+        
+        titleLabel = UILabel(frame: CGRect(x: 15, y: 20, width: screenWidth - 30, height: 45))
+        titleLabel!.textColor = color(with: 98, green: 98, blue: 98)
+        titleLabel!.font = UIFont.systemFont(ofSize: 22, weight: UIFontWeightLight)
+        titleLabel!.textAlignment = .center
+        titleLabel!.text = "Weekday"
+        backView!.addSubview(titleLabel!)
         
         doneButton = UIButton(frame: CGRect(x: screenWidth - 80, y: 30, width: 80, height: 30))
         doneButton!.setTitle("Done", for: .normal)
@@ -97,12 +105,26 @@ class WeekdayViewController: UIViewController, UITableViewDelegate, UITableViewD
         // Dispose of any resources that can be recreated.
     }
     
+    func _refreshRoutines() {
+        
+        routineWeekday = fetchRoutineWeekday(with: (routineWeekday?.id)!)
+        tableView!.reloadData()
+    }
+    
     func _pressOnCancelButton(sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
     }
     
     func _pressOnDoneButton(sender: UIButton) {
+        
+        saveRoutineWeekday(routineWeekday: routineWeekday)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: notificationWeekdaySaved), object: nil)
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    func _pressOnSwitcher(sender: UISwitch) {
+        routineWeekday?.bNeedNotification = sender.isOn
+        tableView?.reloadSections([1], with: .automatic)
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -111,7 +133,7 @@ class WeekdayViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            return 3
+            return 2
         } else {
             if routineWeekday != nil {
                 return routineWeekday!.routines!.count + 1
@@ -124,25 +146,20 @@ class WeekdayViewController: UIViewController, UITableViewDelegate, UITableViewD
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             if indexPath.row == 0 {
-                let cell: WeekdayTextTableViewCell = tableView.dequeueReusableCell(withIdentifier: kWeekdayTextCellId) as! WeekdayTextTableViewCell
+                let cell: WeekdayColorTableViewCell = tableView.dequeueReusableCell(withIdentifier: kWeekdayColorCellId) as! WeekdayColorTableViewCell
                 cell.selectionStyle = .none
-                cell.titleLabel?.text = "Routine Name"
-                cell.textField?.placeholder = "Input name here"
-                cell.textField?.text = routineWeekday?.name
+                cell.titleLabel?.text = "Block Color"
+                cell.colorView?.backgroundColor = routineWeekday?.blockColor ?? UIColor.lightGray
                 let line = UIView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: onePixel))
                 line.backgroundColor = color(with: 231, green: 231, blue: 231)
                 cell.addSubview(line)
                 return cell
             } else if indexPath.row == 1 {
-                let cell: WeekdayColorTableViewCell = tableView.dequeueReusableCell(withIdentifier: kWeekdayColorCellId) as! WeekdayColorTableViewCell
-                cell.selectionStyle = .none
-                cell.titleLabel?.text = "Block Color"
-                cell.colorView?.backgroundColor = routineWeekday?.blockColor ?? UIColor.lightGray
-                return cell
-            } else if indexPath.row == 2 {
                 let cell: WeekdaySelectTableViewCell = tableView.dequeueReusableCell(withIdentifier: kWeekdaySelectCellId) as! WeekdaySelectTableViewCell
                 cell.selectionStyle = .none
                 cell.titleLabel?.text = "Need Notification"
+                cell.switcher?.isOn = routineWeekday?.bNeedNotification ?? false
+                cell.switcher?.addTarget(self, action: #selector(self._pressOnSwitcher), for: .valueChanged)
                 if routineWeekday?.blockColor != nil {
                     cell.switcher?.onTintColor = routineWeekday?.blockColor
                 }
@@ -157,11 +174,12 @@ class WeekdayViewController: UIViewController, UITableViewDelegate, UITableViewD
                 cell.selectionStyle = .none
                 return cell
             } else {
+                let routine = routineWeekday?.routines![indexPath.row]
                 let cell: WeekdayRoutineTableViewCell = tableView.dequeueReusableCell(withIdentifier: kWeekdayRoutineCellId) as! WeekdayRoutineTableViewCell
                 cell.selectionStyle = .none
-                cell.bellView?.isHidden = false
-                cell.titleLabel?.text = "Wash in the morning"
-                cell.timeLabel?.text = "8:30 - 9:00"
+                cell.bellView?.isHidden = !routine!.needNotification
+                cell.titleLabel?.text = routine?.name
+                cell.timeLabel?.text = "\(timeFromDate(date: (routine?.start)!)) - \(timeFromDate(date: (routine?.end)!))"
                 return cell
             }
         }
@@ -185,7 +203,7 @@ class WeekdayViewController: UIViewController, UITableViewDelegate, UITableViewD
         header.backgroundColor = UIColor.white
         let titleLabel = UILabel(frame: CGRect(x: 15, y: 20, width: screenWidth - 30, height: 30))
         titleLabel.font = UIFont.boldSystemFont(ofSize: 14)
-        titleLabel.textColor = UIColor(red: 175/255, green: 175/255, blue: 175/255, alpha: 1)
+        titleLabel.textColor = color(with: 175, green: 175, blue: 175)
         if section == 0 {
             titleLabel.text = "Basics"
         } else {
@@ -203,7 +221,7 @@ class WeekdayViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 0 {
-            if indexPath.row == 1 {
+            if indexPath.row == 0 {
                 // tap on 'block color'
                 colorSelectView!._display()
                 DispatchQueue.main.async {
@@ -215,10 +233,39 @@ class WeekdayViewController: UIViewController, UITableViewDelegate, UITableViewD
         } else if indexPath.section == 1 {
             if indexPath.row == routineWeekday?.routines?.count {
                 // tap on 'add new routine'
+                var cellFrame: CGRect = tableView.rectForRow(at: indexPath)
+                cellFrame.size.width  -= 30
+                cellFrame.size.height -= 10
+                cellFrame.origin.x = 15
+                cellFrame.origin.y += tableView.frame.origin.y
                 let routineViewController = RoutineEditViewController()
                 routineViewController.routineEditType = .add
                 routineViewController.transitioningDelegate = self
-                self.present(routineViewController, animated: true, completion: nil)
+                routineViewController.routineWeekdayId = routineWeekday?.id
+                routineViewController.delegate = self
+                animator.startFrame = cellFrame
+                DispatchQueue.main.async {
+                    self.present(routineViewController, animated: true, completion: nil)
+                }
+            } else {
+                // tap on 'edit routine'
+                let routine = routineWeekday?.routines?[indexPath.row]
+                var cellFrame: CGRect = tableView.rectForRow(at: indexPath)
+                cellFrame.size.width  -= 30
+                cellFrame.size.height -= 10
+                cellFrame.origin.x = 15
+                cellFrame.origin.y += tableView.frame.origin.y
+                let routineViewController = RoutineEditViewController()
+                routineViewController.routineEditType = .edit
+                routineViewController.transitioningDelegate = self
+                routineViewController.routine = routine
+                routineViewController.switcherColor = routineWeekday?.blockColor
+                routineViewController.routineWeekdayId = routineWeekday?.id
+                routineViewController.delegate = self
+                animator.startFrame = cellFrame
+                DispatchQueue.main.async {
+                    self.present(routineViewController, animated: true, completion: nil)
+                }
             }
         }
     }
@@ -233,10 +280,51 @@ class WeekdayViewController: UIViewController, UITableViewDelegate, UITableViewD
         tableView!.reloadData()
     }
     
+    func didTapOnBackView() {
+        DispatchQueue.main.async {
+            UIView.animate(withDuration: 0.3, animations: {
+                self.blurView!.alpha = 0
+            })
+        }
+    }
+    
     //MARK: - UIViewControllerTransitioningDelegate
     
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         animator.animatorType = .present
         return animator
+    }
+    
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        animator.animatorType = .dismiss
+        return animator
+    }
+    
+    //MARK: - RoutineEditProtocol
+    
+    func didCreateRoutine(routine: Routine) {
+        
+        if routineWeekday == nil {
+            return
+        }
+        if routineWeekday!.routines == nil {
+            routineWeekday!.routines = []
+        }
+        routineWeekday?.routines?.append(routine)
+        tableView!.reloadSections([1], with: .automatic)
+    }
+    
+    func didModifyRoutine(routine: Routine) {
+        
+        if routineWeekday == nil || routineWeekday!.routines == nil {
+            return
+        }
+        for i in 0..<routineWeekday!.routines!.count {
+            if routineWeekday!.routines![i].id == routine.id {
+                routineWeekday!.routines![i] = routine
+                break
+            }
+        }
+        tableView!.reloadSections([1], with: .automatic)
     }
 }

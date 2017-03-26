@@ -42,21 +42,14 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView!.register(MainTableViewCell.self, forCellReuseIdentifier: MainViewController.kMainCellId)
         self.view.addSubview(tableView!)
         
+        NotificationCenter.default.addObserver(self, selector: #selector(self._refreshWeekdays), name: NSNotification.Name(rawValue: notificationWeekdaySaved), object: nil)
+        
         self._loadWeekdays()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    func _animatedReload() {
-        tableView!.reloadData()
-        let visibleCells = tableView!.visibleCells
-        for i in 0..<visibleCells.count {
-            let indexPath = IndexPath(row: i, section: 0)
-            tableView!.reloadRows(at: [indexPath], with: .automatic)
-        }
     }
     
     //MARK: - Table View Delegate
@@ -100,22 +93,23 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     //MARK: - Private Method
     
     func _loadWeekdays() {
-        weekdays?.append(RoutineWeekday(name: "Monday", blockColor: UIColor(red: 255/255, green: 225/255, blue: 210/255, alpha: 1), routines: [], bIsToday: false))
-        weekdays?.append(RoutineWeekday(name: "Tuesday", blockColor: UIColor(red: 255/255, green: 245/255, blue: 210/255, alpha: 1), routines: [], bIsToday: false))
-        weekdays?.append(RoutineWeekday(name: "Wednesday", blockColor: UIColor(red: 233/255, green: 255/255, blue: 210/255, alpha: 1), routines: [], bIsToday: false))
-        weekdays?.append(RoutineWeekday(name: "Thursday", blockColor: UIColor(red: 210/255, green: 255/255, blue: 216/255, alpha: 1), routines: [], bIsToday: false))
-        weekdays?.append(RoutineWeekday(name: "Friday", blockColor: UIColor(red: 210/255, green: 255/255, blue: 248/255, alpha: 1), routines: [], bIsToday: false))
-        weekdays?.append(RoutineWeekday(name: "Saturday", blockColor: UIColor(red: 210/255, green: 232/255, blue: 255/255, alpha: 1), routines: [], bIsToday: false))
-        weekdays?.append(RoutineWeekday(name: "Sunday", blockColor: UIColor(red: 214/255, green: 210/255, blue: 255/255, alpha: 1), routines: [], bIsToday: false))
-        
-        self._animatedReload()
+        weekdays = globalRoutineWeekdays
+        tableView!.reloadData()
+    }
+    
+    func _refreshWeekdays() {
+        self._loadWeekdays()
     }
     
     //MARK: - UIViewControllerTransitioningDelegate
     
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        print("return an animator")
         animator.animatorType = .present
+        return animator
+    }
+    
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        animator.animatorType = .dismiss
         return animator
     }
 }

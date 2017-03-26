@@ -11,6 +11,7 @@ import UIKit
 protocol WeekdayColorProtocol {
     
     func didSelect(color: UIColor)
+    func didTapOnBackView()
 }
 
 class WeekdayColorSelectView: UIView, UICollectionViewDelegate, UICollectionViewDataSource {
@@ -21,6 +22,8 @@ class WeekdayColorSelectView: UIView, UICollectionViewDelegate, UICollectionView
     var colors: Array<UIColor>?
     
     var delegate: WeekdayColorProtocol?
+    
+    var collectionHeight: Double?
     
     let kColorCellId = "ColorCell"
 
@@ -47,6 +50,7 @@ class WeekdayColorSelectView: UIView, UICollectionViewDelegate, UICollectionView
         backView = UIView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: screenHeight))
         backView!.backgroundColor = UIColor(white: 0, alpha: 0.5)
         backView!.alpha = 0
+        backView!.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self._tapOnBackView)))
         self.addSubview(backView!)
         
         titleLabel = UILabel(frame: CGRect(x: 0, y: 80, width: screenWidth, height: 30))
@@ -61,9 +65,10 @@ class WeekdayColorSelectView: UIView, UICollectionViewDelegate, UICollectionView
         layout.itemSize = CGSize(width: 50, height: 50)
         layout.minimumLineSpacing = 30
         layout.minimumInteritemSpacing = 20
-        layout.sectionInset = UIEdgeInsets(top: 0, left: (screenWidth - 260) / 2, bottom: 0, right: (screenWidth - 260) / 2)
         layout.scrollDirection = .vertical
-        collectionView = UICollectionView(frame: CGRect(x: 0, y: 200, width: screenWidth, height: screenHeight - 200), collectionViewLayout: layout)
+        let lines = (colors!.count % 4 == 0 ? colors!.count / 4 : colors!.count / 4 + 1)
+        collectionHeight = Double((lines - 1) * (50 + 30) + 50)
+        collectionView = UICollectionView(frame: CGRect(x: (screenWidth - 260) / 2, y: 200, width: 260, height: CGFloat(collectionHeight!)), collectionViewLayout: layout)
         collectionView!.delegate = self
         collectionView!.dataSource = self
         collectionView!.alpha = 0
@@ -98,13 +103,18 @@ class WeekdayColorSelectView: UIView, UICollectionViewDelegate, UICollectionView
         self._hide()
     }
     
+    func _tapOnBackView() {
+        _hide()
+        delegate?.didTapOnBackView()
+    }
+    
     func _display() {
         
         self.isHidden = false
         UIView.animate(withDuration: 0.3) {
             self.backView!.alpha = 1
             self.titleLabel!.alpha = 1
-            self.collectionView!.frame = CGRect(x: 0, y: 150, width: screenWidth, height: screenHeight - 200)
+            self.collectionView!.frame = CGRect(x: (screenWidth - 260) / 2, y: 150, width: 260, height: CGFloat(self.collectionHeight!))
             self.collectionView!.alpha = 1
         }
     }
@@ -114,7 +124,7 @@ class WeekdayColorSelectView: UIView, UICollectionViewDelegate, UICollectionView
         UIView.animate(withDuration: 0.3, animations: { 
             self.backView!.alpha = 0
             self.titleLabel!.alpha = 0
-            self.collectionView!.frame = CGRect(x: 0, y: 200, width: screenWidth, height: screenHeight - 200)
+            self.collectionView!.frame = CGRect(x: (screenWidth - 260) / 2, y: 200, width: 260, height: CGFloat(self.collectionHeight!))
             self.collectionView!.alpha = 0
         }) { (finished: Bool) in
             self.isHidden = true

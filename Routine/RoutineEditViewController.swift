@@ -16,39 +16,81 @@ enum RoutineEditType {
     case add, edit
 }
 
+protocol RoutineEditProtocol {
+    
+    func didCreateRoutine(routine: Routine)
+    func didModifyRoutine(routine: Routine)
+}
+
 class RoutineEditViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
 
-    weak var tableView: UITableView!
+    var tableView: UITableView?
     
-    public var routine: Routine?
+    var routine: Routine?
+    var routineWeekdayId: String?
     
     var routineNameField: UITextField?
     
-    var datePicker: UIDatePicker?
+    var doneButton: UIButton?
+    var cancelButton: UIButton?
+    var titleLabel: UILabel?
     var backView: UIView?
     
-    public var routineEditType: RoutineEditType?
+    var datePicker: UIDatePicker?
+    var datePickerBackView: UIView?
+    
+    var delegate: RoutineEditProtocol?
+    
+    var switcherColor: UIColor?
+    
+    var routineEditType: RoutineEditType?
     var datePickType: DatePickType = .start
+    
+    let kRoutineTextCellId = "RoutineTextCell"
+    let kRoutineTimeCellId = "RoutineTimeCell"
+    let kRoutineSelectCellId = "RoutineSelectCell"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        self.view.backgroundColor = UIColor.white
         
-        tableView = UITableView(frame: CGRect(x: 0, y: 80, width: screenWidth, height: screenHeight - 80) , style: .plain)
+        backView = UIView(frame: UIScreen.main.bounds)
+        backView!.alpha = 0
+        self.view.addSubview(backView!)
+        
+        titleLabel = UILabel(frame: CGRect(x: 15, y: 20, width: screenWidth - 30, height: 45))
+        titleLabel!.textColor = color(with: 98, green: 98, blue: 98)
+        titleLabel!.font = UIFont.systemFont(ofSize: 22, weight: UIFontWeightLight)
+        titleLabel!.textAlignment = .center
+        titleLabel!.text = "Routine"
+        backView!.addSubview(titleLabel!)
+        
+        doneButton = UIButton(frame: CGRect(x: screenWidth - 80, y: 30, width: 80, height: 30))
+        doneButton!.setTitle("Done", for: .normal)
+        doneButton!.setTitleColor(UIColor(red: 98/255, green: 98/255, blue: 98/255, alpha: 1), for: .normal)
+        doneButton!.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: UIFontWeightLight)
+        doneButton!.addTarget(self, action: #selector(self._pressOnDoneButton), for: .touchUpInside)
+        backView!.addSubview(doneButton!)
+        
+        cancelButton = UIButton(frame: CGRect(x: 0, y: 30, width: 80, height: 30))
+        cancelButton!.setTitle("Cancel", for: .normal)
+        cancelButton!.setTitleColor(UIColor(red: 98/255, green: 98/255, blue: 98/255, alpha: 1), for: .normal)
+        cancelButton!.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: UIFontWeightLight)
+        cancelButton!.addTarget(self, action: #selector(self._pressOnCancelButton), for: .touchUpInside)
+        backView!.addSubview(cancelButton!)
+        
+        tableView = UITableView(frame: CGRect(x: 0, y: 80, width: screenWidth, height: screenHeight - 80) , style: .grouped)
         tableView!.dataSource = self
         tableView!.delegate = self
         tableView!.separatorColor = color(with: 231, green: 231, blue: 231)
         tableView!.backgroundColor = UIColor.white
         tableView!.keyboardDismissMode = .onDrag
-        tableView!.tableFooterView = UIView()
-        tableView!.register(<#T##cellClass: AnyClass?##AnyClass?#>, forCellReuseIdentifier: <#T##String#>)
+        tableView!.register(RoutineTextTableViewCell.self, forCellReuseIdentifier: kRoutineTextCellId)
+        tableView!.register(RoutineTimeTableViewCell.self, forCellReuseIdentifier: kRoutineTimeCellId)
+        tableView!.register(RoutineSelectTableViewCell.self, forCellReuseIdentifier: kRoutineSelectCellId)
+        tableView!.tableFooterView = UIView(frame: CGRect.zero)
         backView!.addSubview(tableView!)
-        
-        
-        
-        
-        
-        tableView.tableFooterView = UIView(frame: CGRect.zero)
         
         if routine == nil {
             let now = Date()
@@ -61,21 +103,28 @@ class RoutineEditViewController: UIViewController, UITableViewDelegate, UITableV
             title = "Edit routine"
         }
         
-        backView = UIView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: screenHeight))
-        backView?.backgroundColor = UIColor(white: 0, alpha: 0.5)
-        backView?.isHidden = true
-        self.backView?.alpha = 0
-        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(self._pressOnBackView))
-        backView?.addGestureRecognizer(tapRecognizer)
-        self.view.addSubview(backView!)
+        datePickerBackView = UIView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: screenHeight))
+        datePickerBackView?.backgroundColor = UIColor(white: 0, alpha: 0.5)
+        datePickerBackView?.isHidden = true
+        self.datePickerBackView?.alpha = 0
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(self._pressOndatePickerBackView))
+        datePickerBackView?.addGestureRecognizer(tapRecognizer)
+        backView!.addSubview(datePickerBackView!)
         
         datePicker = UIDatePicker(frame: CGRect(x: 0, y: screenHeight, width: screenWidth, height: 200))
         datePicker?.backgroundColor = UIColor.white
         datePicker?.datePickerMode = UIDatePickerMode.time
         datePicker?.addTarget(self, action: #selector(self._datePickerValueChanged), for: UIControlEvents.valueChanged)
-        self.view.addSubview(datePicker!)
+        backView!.addSubview(datePicker!)
         
-        tableView.reloadData()
+        tableView!.reloadData()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        UIView.animate(withDuration: 0.3) {
+            self.backView!.alpha = 1
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -83,47 +132,27 @@ class RoutineEditViewController: UIViewController, UITableViewDelegate, UITableV
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func _pressOnDoneItem(_ sender: UIBarButtonItem) {
+    func _pressOnCancelButton(sender: UIButton) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    func _pressOnDoneButton(sender: UIButton) {
+        
         if routineNameField?.text?.characters.count == 0 {
             return
         }
         routine!.name = (routineNameField?.text)!
         
-        var routines: Array<Routine>? = readRoutines()
-        if routines != nil {
-            var contains: Bool = false
-            for index in 0..<routines!.count {
-                if routines![index].id == routine?.id {
-                    contains = true
-                    routines![index] = routine!
-                    break
-                }
+        if delegate != nil {
+            if routineEditType == .add {
+                delegate!.didCreateRoutine(routine: routine!)
+            } else {
+                delegate!.didModifyRoutine(routine: routine!)
             }
-            if !contains {
-                routines!.append(routine!)
-            }
-        } else {
-            routines = []
-            routines!.append(routine!)
-        }
-        saveRoutines(routines: routines!)
-        
-        // schedule local notification
-        if routine!.needNotification {
-            scheduleLocalNotification(routine: routine!)
-        } else {
-            removeLocalNotification(routine: routine!)
-        }
-        
-        // post created notification
-        if routineEditType == .add {
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: notificationRoutineCreated), object: nil)
-        } else {
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: notificationRoutineModified), object: nil)
         }
         
         // back to previous view controller
-        navigationController!.popViewController(animated: true)
+        self.dismiss(animated: true, completion: nil)
     }
     
     //MARK: - table view delegate
@@ -144,38 +173,40 @@ class RoutineEditViewController: UIViewController, UITableViewDelegate, UITableV
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "AddInputCell")
-            cell?.selectionStyle = UITableViewCellSelectionStyle.none
-            let nameField = cell?.viewWithTag(101) as! UITextField
-            nameField.text = routine?.name
-            nameField.delegate = self
+            let cell: RoutineTextTableViewCell = tableView.dequeueReusableCell(withIdentifier: kRoutineTextCellId) as! RoutineTextTableViewCell
+            cell.selectionStyle = UITableViewCellSelectionStyle.none
+            let nameField = cell.textField
+            nameField?.text = routine?.name
+            nameField?.placeholder = "Input routine name here"
+            nameField?.delegate = self
             routineNameField = nameField
-            return cell!
+            return cell
         } else if indexPath.section == 1 {
             if indexPath.row == 0 {
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat = "hh:mm"
-                let cell = tableView.dequeueReusableCell(withIdentifier: "AddDateCell")
-                cell?.textLabel?.text = "Start Time"
-                cell?.detailTextLabel?.text = dateFormatter.string(from: routine!.start)
-                return cell!
+                let cell: RoutineTimeTableViewCell = tableView.dequeueReusableCell(withIdentifier: kRoutineTimeCellId) as! RoutineTimeTableViewCell
+                cell.titleLabel?.text = "Start Time"
+                cell.detailLabel?.text = dateFormatter.string(from: routine!.start)
+                return cell
             } else {
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat = "hh:mm"
-                let cell = tableView.dequeueReusableCell(withIdentifier: "AddDateCell")
-                cell?.textLabel?.text = "End Time"
-                cell?.detailTextLabel?.text = dateFormatter.string(from: routine!.end)
-                return cell!
+                let cell: RoutineTimeTableViewCell = tableView.dequeueReusableCell(withIdentifier: kRoutineTimeCellId) as! RoutineTimeTableViewCell
+                cell.titleLabel?.text = "End Time"
+                cell.detailLabel?.text = dateFormatter.string(from: routine!.end)
+                return cell
             }
         } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "AddSelectCell")
-            cell?.selectionStyle = UITableViewCellSelectionStyle.none
-            cell?.textLabel?.text = "Need Notification"
-            let switcher = UISwitch(frame: CGRect(x: 0, y: 0, width: 80, height: 30))
-            switcher.isOn = routine!.needNotification
-            switcher.addTarget(self, action: #selector(self._pressOnSwitch), for: UIControlEvents.touchUpInside)
-            cell?.accessoryView = switcher
-            return cell!
+            let cell: RoutineSelectTableViewCell = tableView.dequeueReusableCell(withIdentifier: kRoutineSelectCellId) as! RoutineSelectTableViewCell
+            cell.selectionStyle = UITableViewCellSelectionStyle.none
+            cell.titleLabel?.text = "Need Notification"
+            cell.switcher?.isOn = routine!.needNotification
+            if switcherColor != nil {
+                cell.switcher?.onTintColor = switcherColor!
+            }
+            cell.switcher?.addTarget(self, action: #selector(self._pressOnSwitch), for: UIControlEvents.touchUpInside)
+            return cell
         }
     }
     
@@ -226,8 +257,8 @@ class RoutineEditViewController: UIViewController, UITableViewDelegate, UITableV
         view.backgroundColor = UIColor.white
         let titleLabel = UILabel(frame: CGRect(x: 15, y: 20, width: screenWidth - 15, height: 30))
         titleLabel.text = title
-        titleLabel.font = UIFont.systemFont(ofSize: 13)
-        titleLabel.textColor = UIColor.lightGray
+        titleLabel.font = UIFont.boldSystemFont(ofSize: 14)
+        titleLabel.textColor = color(with: 175, green: 175, blue: 175)
         view.addSubview(titleLabel)
         return view
     }
@@ -235,10 +266,10 @@ class RoutineEditViewController: UIViewController, UITableViewDelegate, UITableV
     func _showDatePicker(with type: DatePickType) {
         self.datePickType = type
         
-        self.backView?.isHidden = false
+        self.datePickerBackView?.isHidden = false
         UIView.animate(withDuration: 0.3, delay: 0, options: UIViewAnimationOptions.curveEaseInOut, animations: {
             self.datePicker?.frame = CGRect(x: 0, y: screenHeight - 200, width: screenWidth, height: 200)
-            self.backView?.alpha = 1
+            self.datePickerBackView?.alpha = 1
         })
     }
     
@@ -249,16 +280,16 @@ class RoutineEditViewController: UIViewController, UITableViewDelegate, UITableV
         case .end:
             routine!.end = sender.date
         }
-        tableView.reloadData()
+        tableView!.reloadData()
     }
     
-    func _pressOnBackView(recognizer: UITapGestureRecognizer) {
+    func _pressOndatePickerBackView(recognizer: UITapGestureRecognizer) {
         UIView.animate(withDuration: 0.3, delay: 0, options: UIViewAnimationOptions.curveEaseInOut, animations: {
             self.datePicker?.frame = CGRect(x: 0, y: screenHeight, width: screenWidth, height: 200)
-            self.backView?.alpha = 0
+            self.datePickerBackView?.alpha = 0
         }) { (finished: Bool) in
             if finished {
-                self.backView?.isHidden = true
+                self.datePickerBackView?.isHidden = true
             }
         }
     }

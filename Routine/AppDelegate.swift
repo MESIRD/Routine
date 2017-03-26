@@ -20,6 +20,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // increase loading time
 //        Thread.sleep(forTimeInterval: 1)
         
+        // app initialization
+        self._initAppData()
+        
         // register local notification
         application.registerUserNotificationSettings(UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil))
         
@@ -39,6 +42,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidEnterBackground(_ application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+        save()
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
@@ -52,16 +56,37 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+        save()
     }
-
     
     func application(_ application: UIApplication, didReceive notification: UILocalNotification) {
         print("Local notification is received!\n\(notification)")
         application.applicationIconBadgeNumber = 0
     }
 
-    func _warpClassToUserDefaults() {
+    //MARK: - private methods
+    
+    func _initAppData() {
         
+        let sharedUserDefaults: UserDefaults = UserDefaults(suiteName: appGroupId)!
+        
+        let secondLaunch = sharedUserDefaults.bool(forKey: userDefaultsSecondLaunch)
+        if secondLaunch {
+            globalRoutineWeekdays = read()
+            return
+        }
+        var weekdays = Array<RoutineWeekday>()
+        let today = weekdayForToday()
+        weekdays.append(RoutineWeekday(name: "Monday",    blockColor: UIColor(red: 255/255, green: 225/255, blue: 210/255, alpha: 1), routines: [], bIsToday: Bool(today == 1)))
+        weekdays.append(RoutineWeekday(name: "Tuesday",   blockColor: UIColor(red: 255/255, green: 245/255, blue: 210/255, alpha: 1), routines: [], bIsToday: Bool(today == 2)))
+        weekdays.append(RoutineWeekday(name: "Wednesday", blockColor: UIColor(red: 233/255, green: 255/255, blue: 210/255, alpha: 1), routines: [], bIsToday: Bool(today == 3)))
+        weekdays.append(RoutineWeekday(name: "Thursday",  blockColor: UIColor(red: 210/255, green: 255/255, blue: 216/255, alpha: 1), routines: [], bIsToday: Bool(today == 4)))
+        weekdays.append(RoutineWeekday(name: "Friday",    blockColor: UIColor(red: 210/255, green: 255/255, blue: 248/255, alpha: 1), routines: [], bIsToday: Bool(today == 5)))
+        weekdays.append(RoutineWeekday(name: "Saturday",  blockColor: UIColor(red: 210/255, green: 232/255, blue: 255/255, alpha: 1), routines: [], bIsToday: Bool(today == 6)))
+        weekdays.append(RoutineWeekday(name: "Sunday",    blockColor: UIColor(red: 214/255, green: 210/255, blue: 255/255, alpha: 1), routines: [], bIsToday: Bool(today == 0)))
+        globalRoutineWeekdays = weekdays
+        sharedUserDefaults.set(true, forKey: userDefaultsSecondLaunch)
     }
+    
 }
 

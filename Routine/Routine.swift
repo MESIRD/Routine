@@ -8,20 +8,16 @@
 
 import Foundation
 
-let appGroupId: String = "group.com.mesird.Routine"
-
-let userDefaultsRoutines = "UserDefaultsRoutines"
-
 // Routine data structure
-public class Routine: NSObject, NSCoding {
+class Routine: NSObject, NSCoding {
     
-    public var id: String
-    public var name: String
-    public var start: Date
-    public var end: Date
-    public var needNotification: Bool
+    var id: String
+    var name: String
+    var start: Date
+    var end: Date
+    var needNotification: Bool
     
-    public init(name: String, start: Date, end: Date, needNotification: Bool) {
+    init(name: String, start: Date, end: Date, needNotification: Bool) {
         self.id = NSUUID().uuidString
         self.name = name
         self.start = start
@@ -29,7 +25,7 @@ public class Routine: NSObject, NSCoding {
         self.needNotification = needNotification
     }
     
-    public required init?(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         id = aDecoder.decodeObject(forKey: "id") as! String
         name = aDecoder.decodeObject(forKey: "name") as! String
         start = aDecoder.decodeObject(forKey: "start") as! Date
@@ -37,39 +33,11 @@ public class Routine: NSObject, NSCoding {
         needNotification = aDecoder.decodeBool(forKey: "needNotification")
     }
     
-    public func encode(with aCoder: NSCoder) {
+    func encode(with aCoder: NSCoder) {
         aCoder.encode(id, forKey: "id")
         aCoder.encode(name, forKey: "name")
         aCoder.encode(start, forKey: "start")
         aCoder.encode(end, forKey: "end")
         aCoder.encode(needNotification, forKey: "needNotification")
-    }
-}
-
-public func saveRoutines(routines: Array<Routine>) {
-    
-    let sharedUserDefaults: UserDefaults = UserDefaults(suiteName: appGroupId)!
-    var temRoutines: Array<Data> = []
-    for routine in routines {
-        let temRoutine = NSKeyedArchiver.archivedData(withRootObject: routine)
-        temRoutines.append(temRoutine)
-    }
-    sharedUserDefaults.setValue(temRoutines, forKey: userDefaultsRoutines)
-    sharedUserDefaults.synchronize()
-}
-
-public func readRoutines() -> Array<Routine> {
-    
-    let sharedUserDefaults: UserDefaults = UserDefaults(suiteName: appGroupId)!
-    let tempRoutines: Array<Data>? = sharedUserDefaults.object(forKey: userDefaultsRoutines) as? Array<Data>
-    if tempRoutines != nil {
-        var routines: Array<Routine> = []
-        for data in tempRoutines! {
-            let routine = NSKeyedUnarchiver.unarchiveObject(with: data) as! Routine
-            routines.append(routine)
-        }
-        return routines
-    } else {
-        return []
     }
 }

@@ -65,7 +65,23 @@ class MainViewControllerAnimator: NSObject, UIViewControllerAnimatedTransitionin
             })
         } else {
             // dismiss current view controller
-            // TODO
+            containerView.addSubview((toVC?.view)!)
+            containerView.bringSubview(toFront: (fromVC?.view)!)
+            UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: { 
+                fromVC?.view.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+            }, completion: { (finished: Bool) in
+                var fromVCFrame = fromVC?.view.frame
+                fromVCFrame?.origin.y = screenHeight
+                let maskView = toVC?.view.viewWithTag(101)
+                UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: {
+                    fromVC?.view.frame = fromVCFrame!
+                    maskView?.alpha = 0
+//                    toVC?.view.transform = CGAffineTransform(scaleX: 1, y: 1)
+                }, completion: { (finished: Bool) in
+                    maskView?.removeFromSuperview()
+                    transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
+                })
+            })
         }
     }
     
@@ -84,7 +100,7 @@ class MainViewControllerAnimator: NSObject, UIViewControllerAnimatedTransitionin
         let fromVC = self.transitionContext?.viewController(forKey: UITransitionContextViewControllerKey.from)
         fromVC?.view.layer.mask = nil
         fromVC?.view.transform = CGAffineTransform(scaleX: 1, y: 1)
-        fromVC?.view.viewWithTag(101)?.removeFromSuperview()
+//        fromVC?.view.viewWithTag(101)?.removeFromSuperview()
         self.transitionContext?.view(forKey: UITransitionContextViewKey.to)?.layer.mask = nil
     }
 }
