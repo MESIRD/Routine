@@ -20,35 +20,37 @@ protocol RoutineEditProtocol {
     
     func didCreateRoutine(routine: Routine)
     func didModifyRoutine(routine: Routine)
+    func didDeleteRoutine(routine: Routine)
 }
 
 class RoutineEditViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
 
     var tableView: UITableView?
-    
-    var routine: Routine?
-    var routineWeekdayId: String?
-    
     var routineNameField: UITextField?
-    
     var doneButton: UIButton?
     var cancelButton: UIButton?
     var titleLabel: UILabel?
     var backView: UIView?
-    
     var datePicker: UIDatePicker?
     var datePickerBackView: UIView?
     
+    // routine
+    var routine: Routine?
+    // weekday id
+    var routineWeekdayId: String?
+    // routine edit protocol delegate
     var delegate: RoutineEditProtocol?
-    
+    // switcher color
     var switcherColor: UIColor?
-    
+    // edit type
     var routineEditType: RoutineEditType?
+    // pick type
     var datePickType: DatePickType = .start
     
-    let kRoutineTextCellId = "RoutineTextCell"
-    let kRoutineTimeCellId = "RoutineTimeCell"
+    let kRoutineTextCellId   = "RoutineTextCell"
+    let kRoutineTimeCellId   = "RoutineTimeCell"
     let kRoutineSelectCellId = "RoutineSelectCell"
+    let kRoutineDeleteCellId = "RoutineDeleteCell"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -89,6 +91,7 @@ class RoutineEditViewController: UIViewController, UITableViewDelegate, UITableV
         tableView!.register(RoutineTextTableViewCell.self, forCellReuseIdentifier: kRoutineTextCellId)
         tableView!.register(RoutineTimeTableViewCell.self, forCellReuseIdentifier: kRoutineTimeCellId)
         tableView!.register(RoutineSelectTableViewCell.self, forCellReuseIdentifier: kRoutineSelectCellId)
+        tableView!.register(RoutineDeleteTableViewCell.self, forCellReuseIdentifier: kRoutineDeleteCellId)
         tableView!.tableFooterView = UIView(frame: CGRect.zero)
         backView!.addSubview(tableView!)
         
@@ -158,23 +161,27 @@ class RoutineEditViewController: UIViewController, UITableViewDelegate, UITableV
     //MARK: - table view delegate
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return routineEditType == .add ? 3 : 4
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
         if section == 0 {
             return 1
         } else if section == 1 {
             return 2
-        } else {
+        } else if section == 2 {
+            return 1
+        } else if section == 3 {
             return 1
         }
+        return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             let cell: RoutineTextTableViewCell = tableView.dequeueReusableCell(withIdentifier: kRoutineTextCellId) as! RoutineTextTableViewCell
-            cell.selectionStyle = UITableViewCellSelectionStyle.none
+            cell.selectionStyle = .none
             let nameField = cell.textField
             nameField?.text = routine?.name
             nameField?.placeholder = "Input routine name here"
@@ -197,9 +204,9 @@ class RoutineEditViewController: UIViewController, UITableViewDelegate, UITableV
                 cell.detailLabel?.text = dateFormatter.string(from: routine!.end)
                 return cell
             }
-        } else {
+        } else if indexPath.section == 2 {
             let cell: RoutineSelectTableViewCell = tableView.dequeueReusableCell(withIdentifier: kRoutineSelectCellId) as! RoutineSelectTableViewCell
-            cell.selectionStyle = UITableViewCellSelectionStyle.none
+            cell.selectionStyle = .none
             cell.titleLabel?.text = "Need Notification"
             cell.switcher?.isOn = routine!.needNotification
             if switcherColor != nil {
@@ -207,21 +214,32 @@ class RoutineEditViewController: UIViewController, UITableViewDelegate, UITableV
             }
             cell.switcher?.addTarget(self, action: #selector(self._pressOnSwitch), for: UIControlEvents.touchUpInside)
             return cell
+        } else if indexPath.section == 3 {
+            let cell: RoutineDeleteTableViewCell = tableView.dequeueReusableCell(withIdentifier: kRoutineDeleteCellId) as! RoutineDeleteTableViewCell
+            cell.selectionStyle = .none
+            return cell
         }
+        return UITableViewCell()
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        
+        if section == 3 {
+            return 30
+        }
         return 50
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
         if section == 0 {
             return self._headerView(with: "Routine name")
         } else if section == 1 {
             return self._headerView(with: "Time duration")
-        } else {
+        } else if section == 2 {
             return self._headerView(with: "Additional")
         }
+        return UIView()
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -234,6 +252,22 @@ class RoutineEditViewController: UIViewController, UITableViewDelegate, UITableV
             } else {
                 // end
                 self._showDatePicker(with: .end)
+            }
+        } else if indexPath.section == 3 {
+            if indexPath.row == 0 {
+                // delete
+                let alertController = UIAlertController(title: "Warning", message: "Are you sure to delete this routine?", preferredStyle: .alert)
+                let confirmAction = UIAlertAction(title: "Yes", style: .default, handler: { (action: UIAlertAction) in
+                    // delete routine and pop
+                    if self.delegate != nil {
+                        self.delegate!.didDeleteRoutine(routine: self.routine!)
+                    }
+                    self.dismiss(animated: true, completion: nil)
+                })
+                let cancelAction = UIAlertAction(title: "No", style: .cancel, handler: nil)
+                alertController.addAction(confirmAction)
+                alertController.addAction(cancelAction)
+                self.present(alertController, animated: true, completion: nil)
             }
         }
     }

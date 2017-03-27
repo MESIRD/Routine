@@ -50,7 +50,7 @@ class WeekdayViewController: UIViewController, UITableViewDelegate, UITableViewD
         titleLabel!.textColor = color(with: 98, green: 98, blue: 98)
         titleLabel!.font = UIFont.systemFont(ofSize: 22, weight: UIFontWeightLight)
         titleLabel!.textAlignment = .center
-        titleLabel!.text = "Weekday"
+        titleLabel!.text = routineWeekday?.name
         backView!.addSubview(titleLabel!)
         
         doneButton = UIButton(frame: CGRect(x: screenWidth - 80, y: 30, width: 80, height: 30))
@@ -118,6 +118,7 @@ class WeekdayViewController: UIViewController, UITableViewDelegate, UITableViewD
     func _pressOnDoneButton(sender: UIButton) {
         
         saveRoutineWeekday(routineWeekday: routineWeekday)
+        createNotifications(routineWeekday: routineWeekday!)
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: notificationWeekdaySaved), object: nil)
         self.dismiss(animated: true, completion: nil)
     }
@@ -271,6 +272,7 @@ class WeekdayViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func didSelect(color: UIColor) {
+        
         routineWeekday?.blockColor = color
         DispatchQueue.main.async {
             UIView.animate(withDuration: 0.3, animations: {
@@ -281,6 +283,7 @@ class WeekdayViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func didTapOnBackView() {
+        
         DispatchQueue.main.async {
             UIView.animate(withDuration: 0.3, animations: {
                 self.blurView!.alpha = 0
@@ -322,6 +325,20 @@ class WeekdayViewController: UIViewController, UITableViewDelegate, UITableViewD
         for i in 0..<routineWeekday!.routines!.count {
             if routineWeekday!.routines![i].id == routine.id {
                 routineWeekday!.routines![i] = routine
+                break
+            }
+        }
+        tableView!.reloadSections([1], with: .automatic)
+    }
+    
+    func didDeleteRoutine(routine: Routine) {
+        
+        if routineWeekday == nil {
+            return
+        }
+        for i in 0..<routineWeekday!.routines!.count {
+            if routineWeekday!.routines![i].id == routine.id {
+                routineWeekday!.routines!.remove(at: i)
                 break
             }
         }

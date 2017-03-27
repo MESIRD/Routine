@@ -24,10 +24,10 @@ let notificationRoutineCreated  = "NotificationRoutineCreated"
 let notificationRoutineModified = "NotificationRoutineModified"
 
 // functions
-func todayDate() -> String {
+func dateTextFor(date: Date) -> String {
     let dateFormatter: DateFormatter = DateFormatter()
     dateFormatter.dateFormat = "yyyy-MM-dd"
-    return dateFormatter.string(from: Date())
+    return dateFormatter.string(from: date)
 }
 
 func weekdayForToday() -> Int {
@@ -46,6 +46,18 @@ func timeFromDate(date: Date) -> String {
     let dateFormatter: DateFormatter = DateFormatter()
     dateFormatter.dateFormat = "hh:mm"
     return dateFormatter.string(from: date)
+}
+
+// Sun:1, Mon:2, Tue:3, Wed:4, Thu:5, Fri:6, Sat:7
+func nextDate(for weekday: Int) -> Date {
+    let calendar = Calendar.current
+    let today = Date()
+    let todayWeekday: Int = calendar.component(.weekday, from: today)
+    var interval: Int = weekday - todayWeekday
+    interval = interval >= 0 ? interval : interval + 7
+    var intervalComponents = DateComponents()
+    intervalComponents.day = interval
+    return calendar.date(byAdding: intervalComponents, to: today)!
 }
 
 func color(with red: UInt8, green: UInt8, blue: UInt8) -> UIColor {
@@ -115,30 +127,40 @@ func saveRoutineWeekday(routineWeekday: RoutineWeekday?) {
 }
 
 // notification
-func scheduleLocalNotification(routine: Routine) {
-    
-    let fireDate: Date = dateFromString(dateText: "\(todayDate()) \(timeFromDate(date: routine.start))")
-    let localNotification: UILocalNotification = UILocalNotification()
-    localNotification.fireDate = fireDate
-    localNotification.timeZone = NSTimeZone.default
-    localNotification.repeatInterval = NSCalendar.Unit.day
-    localNotification.soundName = UILocalNotificationDefaultSoundName
-    localNotification.alertBody = "Time to \(routine.name)"
-    localNotification.applicationIconBadgeNumber = 1
-    localNotification.userInfo = ["identifier": routine.id]
-    UIApplication.shared.scheduleLocalNotification(localNotification)
+func createNotifications(routineWeekday: RoutineWeekday) {
+    removeNotification(with: routineWeekday.id!)
+    for routine in routineWeekday.routines! {
+        scheduleLocalNotification(routine: routine, routineWeekday: routineWeekday)
+    }
 }
 
-func removeLocalNotification(routine: Routine) {
+func removeNotification(with weekdayId: String) {
     let scheduledLocalNotifications: Array<UILocalNotification> = UIApplication.shared.scheduledLocalNotifications!
     for notification in scheduledLocalNotifications {
         let dict: Dictionary? = notification.userInfo
         if dict != nil {
-            let identifier: String? = dict!["identifier"] as? String
-            if identifier != nil && routine.id == identifier {
+            let tempWeekdayId: String? = dict!["weekdayId"] as? String
+            if tempWeekdayId != nil && tempWeekdayId! == weekdayId {
                 UIApplication.shared.cancelLocalNotification(notification)
-                break
             }
         }
     }
+}
+
+func scheduleLocalNotification(routine: Routine, routineWeekday: RoutineWeekday) {
+    let date = nextDate(for: routineWeekday.weekday!)
+    let fireDate: Date = dateFromString(dateText: "\(dateTextFor(date: date)) \(timeFromDate(date: routine.start))")
+    let localNotification: UILocalNotification = UILocalNotification()
+    localNotification.fireDate = fireDate
+    localNotification.timeZone = NSTimeZone.default
+    localNotification.repeatInterval = NSCalendar.Unit.weekOfYear
+    localNotification.soundName = UILocalNotificationDefaultSoundName
+    localNotification.alertBody = "Time to \(routine.name)"
+    localNotification.applicationIconBadgeNumber = 1
+    localNotification.userInfo = ["identifier": routine.id, "weekdayId": routineWeekday.id!]
+    UIApplication.shared.scheduleLocalNotification(localNotification)
+}
+
+func removeAllNotifications() {
+    UIApplication.shared.cancelAllLocalNotifications()
 }

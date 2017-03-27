@@ -30,12 +30,12 @@ class MainTableViewCell: UITableViewCell {
         
         titleLabel = UILabel(frame: CGRect(x: 15, y: 17, width: screenWidth - 60, height: 26))
         titleLabel!.font = UIFont.systemFont(ofSize: 24, weight: UIFontWeightLight)
-        titleLabel!.textColor = UIColor(red: 98/255, green: 98/255, blue: 98/255, alpha: 1)
+        titleLabel!.textColor = UIColor(red: 136/255, green: 136/255, blue: 136/255, alpha: 1)
         backView!.addSubview(titleLabel!)
         
         detailLabel = UILabel(frame: CGRect(x: 15, y: 24, width: screenWidth - 60, height: 17))
         detailLabel!.font = UIFont.systemFont(ofSize: 15, weight: UIFontWeightLight)
-        detailLabel!.textColor = UIColor(red: 98/255, green: 98/255, blue: 98/255, alpha: 1)
+        detailLabel!.textColor = UIColor(red: 136/255, green: 136/255, blue: 136/255, alpha: 1)
         detailLabel!.textAlignment = NSTextAlignment.right
         backView!.addSubview(detailLabel!)
         

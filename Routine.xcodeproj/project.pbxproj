@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D702ED651E894568005BDC85 /* RoutineDeleteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D702ED641E894568005BDC85 /* RoutineDeleteTableViewCell.swift */; };
 		D72546681E7EB25C00E8E6FE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72546671E7EB25C00E8E6FE /* AppDelegate.swift */; };
 		D725466F1E7EB25C00E8E6FE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D725466E1E7EB25C00E8E6FE /* Assets.xcassets */; };
 		D725467F1E7ECB9F00E8E6FE /* Prefix.swift in Sources */ = {isa = PBXBuildFile; fileRef = D725467E1E7ECB9F00E8E6FE /* Prefix.swift */; };
@@ -61,6 +62,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		D702ED641E894568005BDC85 /* RoutineDeleteTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutineDeleteTableViewCell.swift; sourceTree = "<group>"; };
 		D72546641E7EB25C00E8E6FE /* Routine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Routine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D72546671E7EB25C00E8E6FE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D725466C1E7EB25C00E8E6FE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -187,6 +189,7 @@
 				D7B302A71E87912100819796 /* RoutineTimeTableViewCell.swift */,
 				D7B302A91E87927600819796 /* RoutineTextTableViewCell.swift */,
 				D7B302AB1E87938C00819796 /* RoutineSelectTableViewCell.swift */,
+				D702ED641E894568005BDC85 /* RoutineDeleteTableViewCell.swift */,
 				D798454B1E86349D00A34C36 /* MainTableView.swift */,
 			);
 			name = View;
@@ -334,6 +337,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D702ED651E894568005BDC85 /* RoutineDeleteTableViewCell.swift in Sources */,
 				D79845521E86506B00A34C36 /* WeekdaySelectTableViewCell.swift in Sources */,
 				F558761D1E84DC4700A4AB7F /* Routine.swift in Sources */,
 				D725467F1E7ECB9F00E8E6FE /* Prefix.swift in Sources */,

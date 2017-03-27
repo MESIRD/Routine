@@ -77,13 +77,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         var weekdays = Array<RoutineWeekday>()
         let today = weekdayForToday()
-        weekdays.append(RoutineWeekday(name: "Monday",    blockColor: UIColor(red: 255/255, green: 225/255, blue: 210/255, alpha: 1), routines: [], bIsToday: Bool(today == 1)))
-        weekdays.append(RoutineWeekday(name: "Tuesday",   blockColor: UIColor(red: 255/255, green: 245/255, blue: 210/255, alpha: 1), routines: [], bIsToday: Bool(today == 2)))
-        weekdays.append(RoutineWeekday(name: "Wednesday", blockColor: UIColor(red: 233/255, green: 255/255, blue: 210/255, alpha: 1), routines: [], bIsToday: Bool(today == 3)))
-        weekdays.append(RoutineWeekday(name: "Thursday",  blockColor: UIColor(red: 210/255, green: 255/255, blue: 216/255, alpha: 1), routines: [], bIsToday: Bool(today == 4)))
-        weekdays.append(RoutineWeekday(name: "Friday",    blockColor: UIColor(red: 210/255, green: 255/255, blue: 248/255, alpha: 1), routines: [], bIsToday: Bool(today == 5)))
-        weekdays.append(RoutineWeekday(name: "Saturday",  blockColor: UIColor(red: 210/255, green: 232/255, blue: 255/255, alpha: 1), routines: [], bIsToday: Bool(today == 6)))
-        weekdays.append(RoutineWeekday(name: "Sunday",    blockColor: UIColor(red: 214/255, green: 210/255, blue: 255/255, alpha: 1), routines: [], bIsToday: Bool(today == 0)))
+        weekdays.append(RoutineWeekday(name: "Monday",    weekday: 2, blockColor: UIColor(red: 255/255, green: 225/255, blue: 210/255, alpha: 1), routines: [], bIsToday: Bool(today == 2)))
+        weekdays.append(RoutineWeekday(name: "Tuesday",   weekday: 3, blockColor: UIColor(red: 255/255, green: 245/255, blue: 210/255, alpha: 1), routines: [], bIsToday: Bool(today == 3)))
+        weekdays.append(RoutineWeekday(name: "Wednesday", weekday: 4, blockColor: UIColor(red: 233/255, green: 255/255, blue: 210/255, alpha: 1), routines: [], bIsToday: Bool(today == 4)))
+        weekdays.append(RoutineWeekday(name: "Thursday",  weekday: 5, blockColor: UIColor(red: 210/255, green: 255/255, blue: 216/255, alpha: 1), routines: [], bIsToday: Bool(today == 5)))
+        weekdays.append(RoutineWeekday(name: "Friday",    weekday: 6, blockColor: UIColor(red: 210/255, green: 255/255, blue: 248/255, alpha: 1), routines: [], bIsToday: Bool(today == 6)))
+        weekdays.append(RoutineWeekday(name: "Saturday",  weekday: 7, blockColor: UIColor(red: 210/255, green: 232/255, blue: 255/255, alpha: 1), routines: [], bIsToday: Bool(today == 7)))
+        weekdays.append(RoutineWeekday(name: "Sunday",    weekday: 1, blockColor: UIColor(red: 214/255, green: 210/255, blue: 255/255, alpha: 1), routines: [], bIsToday: Bool(today == 1)))
         globalRoutineWeekdays = weekdays
         sharedUserDefaults.set(true, forKey: userDefaultsSecondLaunch)
     }
