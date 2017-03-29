@@ -14,7 +14,6 @@ class MainTableView: UITableView {
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesEnded(touches, with: event)
-        print("table view touches began")
         let point = ((touches as NSSet).anyObject() as! UITouch).location(in: self)
         let indexPath = self.indexPathForRow(at: point)
         if indexPath != nil {
@@ -27,7 +26,6 @@ class MainTableView: UITableView {
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesMoved(touches, with: event)
         let point = ((touches as NSSet).anyObject() as! UITouch).location(in: self)
-        print("table view touches moved: \(point)")
         if pressedCell != nil {
             if pressedCell!.point(inside: point, with: nil) {
                 pressedCell!.displayReleaseAnimation()
@@ -40,7 +38,6 @@ class MainTableView: UITableView {
         super.touchesEnded(touches, with: event)
         let point = ((touches as NSSet).anyObject() as! UITouch).location(in: self)
         let indexPath = self.indexPathForRow(at: point)
-        print("table view touches ended")
         if pressedCell != nil {
             pressedCell!.displayReleaseAnimation()
             pressedCell = nil
@@ -52,7 +49,6 @@ class MainTableView: UITableView {
     
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesCancelled(touches, with: event)
-        print("table view touches cancelled")
         if pressedCell != nil {
             pressedCell!.displayReleaseAnimation()
             pressedCell = nil

@@ -10,9 +10,10 @@ import UIKit
 
 class MainTableViewCell: UITableViewCell {
     
-    public var backView: UIView?
-    public var titleLabel: UILabel?
-    public var detailLabel: UILabel?
+    var backView: UIView?
+    var titleLabel: UILabel?
+    var detailLabel: UILabel?
+    var bellView: UIImageView?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -39,8 +40,15 @@ class MainTableViewCell: UITableViewCell {
         detailLabel!.textAlignment = NSTextAlignment.right
         backView!.addSubview(detailLabel!)
         
-//        let tapGestureRecognizer: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self._tapOnBackView))
-//        backView!.addGestureRecognizer(tapGestureRecognizer)
+        bellView = UIImageView(frame: CGRect(x: 0, y: 20, width: 20, height: 20))
+        bellView!.image = UIImage.init(named: "bell")
+        backView?.addSubview(bellView!)
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        bellView?.frame = CGRect(x: (titleLabel?.frame.origin.x)! + (titleLabel?.text?.width(withConstraintHeight: 26, font: UIFont.systemFont(ofSize: 24, weight: UIFontWeightLight)))! + 10, y: 20, width: 20, height: 20)
     }
     
     required init?(coder aDecoder: NSCoder) {

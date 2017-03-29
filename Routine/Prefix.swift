@@ -23,7 +23,7 @@ let notificationWeekdaySaved    = "NotificationWeekdaySaved"
 let notificationRoutineCreated  = "NotificationRoutineCreated"
 let notificationRoutineModified = "NotificationRoutineModified"
 
-// functions
+// utilities
 func dateTextFor(date: Date) -> String {
     let dateFormatter: DateFormatter = DateFormatter()
     dateFormatter.dateFormat = "yyyy-MM-dd"
@@ -62,6 +62,19 @@ func nextDate(for weekday: Int) -> Date {
 
 func color(with red: UInt8, green: UInt8, blue: UInt8) -> UIColor {
     return UIColor(red: CGFloat(Double(red) * 1.0/255), green: CGFloat(Double(green) * 1.0/255), blue: CGFloat(Double(blue) * 1.0/255), alpha: 1)
+}
+
+extension String {
+    
+    func width(withConstraintHeight height: CGFloat, font: UIFont) -> CGFloat {
+        let rect = self.boundingRect(with: CGSize(width: CGFloat.greatestFiniteMagnitude, height: height), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSFontAttributeName:font], context: nil)
+        return rect.width
+    }
+    
+    func height(withConstraintWidth width: CGFloat, font: UIFont) -> CGFloat {
+        let rect = self.boundingRect(with: CGSize(width: width, height: CGFloat.greatestFiniteMagnitude), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSFontAttributeName:font], context: nil)
+        return rect.height
+    }
 }
 
 // persistence
@@ -113,6 +126,16 @@ func fetchRoutineWeekday(with id: String) -> RoutineWeekday? {
     return nil
 }
 
+func fetchRoutine(withId id: String, inRoutines routines: [Routine]) -> Routine? {
+    
+    for routine in routines {
+        if routine.id == id {
+            return routine
+        }
+    }
+    return nil
+}
+
 func saveRoutineWeekday(routineWeekday: RoutineWeekday?) {
     
     if globalRoutineWeekdays == nil || routineWeekday == nil {
@@ -124,11 +147,15 @@ func saveRoutineWeekday(routineWeekday: RoutineWeekday?) {
             break
         }
     }
+    save()
 }
 
 // notification
 func createNotifications(routineWeekday: RoutineWeekday) {
     removeNotification(with: routineWeekday.id!)
+    if !routineWeekday.bNeedNotification! {
+        return
+    }
     for routine in routineWeekday.routines! {
         scheduleLocalNotification(routine: routine, routineWeekday: routineWeekday)
     }
@@ -155,7 +182,7 @@ func scheduleLocalNotification(routine: Routine, routineWeekday: RoutineWeekday)
     localNotification.timeZone = NSTimeZone.default
     localNotification.repeatInterval = NSCalendar.Unit.weekOfYear
     localNotification.soundName = UILocalNotificationDefaultSoundName
-    localNotification.alertBody = "Time to \(routine.name)"
+    localNotification.alertBody = "Time for '\(routine.name)'"
     localNotification.applicationIconBadgeNumber = 1
     localNotification.userInfo = ["identifier": routine.id, "weekdayId": routineWeekday.id!]
     UIApplication.shared.scheduleLocalNotification(localNotification)

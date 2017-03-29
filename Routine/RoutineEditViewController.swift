@@ -142,8 +142,15 @@ class RoutineEditViewController: UIViewController, UITableViewDelegate, UITableV
     func _pressOnDoneButton(sender: UIButton) {
         
         if routineNameField?.text?.characters.count == 0 {
+            ToastView(title: "Please enter routine name").show(inSeconds: 1.5)
             return
         }
+        
+        if (routine?.start)! > (routine?.end)! {
+            ToastView(title: "Start time larger than end time").show(inSeconds: 1.5)
+            return
+        }
+        
         routine!.name = (routineNameField?.text)!
         
         if delegate != nil {

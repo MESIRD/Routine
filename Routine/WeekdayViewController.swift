@@ -178,7 +178,7 @@ class WeekdayViewController: UIViewController, UITableViewDelegate, UITableViewD
                 let routine = routineWeekday?.routines![indexPath.row]
                 let cell: WeekdayRoutineTableViewCell = tableView.dequeueReusableCell(withIdentifier: kWeekdayRoutineCellId) as! WeekdayRoutineTableViewCell
                 cell.selectionStyle = .none
-                cell.bellView?.isHidden = !routine!.needNotification
+                cell.bellView?.isHidden = (routineWeekday?.bNeedNotification!)! ? !routine!.needNotification : !(routineWeekday?.bNeedNotification!)!
                 cell.titleLabel?.text = routine?.name
                 cell.timeLabel?.text = "\(timeFromDate(date: (routine?.start)!)) - \(timeFromDate(date: (routine?.end)!))"
                 return cell

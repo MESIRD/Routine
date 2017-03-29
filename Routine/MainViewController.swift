@@ -69,6 +69,8 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         cell.titleLabel?.text = routineWeekday.name
         cell.detailLabel?.text = "\(routineWeekday.routines!.count) routines"
         cell.backView?.backgroundColor = routineWeekday.blockColor
+        cell.bellView?.isHidden = !routineWeekday.bNeedNotification!
+        cell.layoutSubviews()
         return cell
     }
     

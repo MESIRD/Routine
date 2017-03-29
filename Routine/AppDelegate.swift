@@ -62,6 +62,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didReceive notification: UILocalNotification) {
         print("Local notification is received!\n\(notification)")
         application.applicationIconBadgeNumber = 0
+        
+        let routineWeekdayId: String = notification.userInfo?["weekdayId"] as! String
+        let routineId: String = notification.userInfo?["identifier"] as! String
+        let routineWeekday = fetchRoutineWeekday(with: routineWeekdayId)
+        let routine = fetchRoutine(withId: routineId, inRoutines: (routineWeekday?.routines)!)
+        let pushAlertView = PushAlertView(routine: routine!, weekday: routineWeekday!)
+        UIApplication.shared.keyWindow?.addSubview(pushAlertView)
+        pushAlertView.show()
     }
 
     //MARK: - private methods
@@ -86,6 +94,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         weekdays.append(RoutineWeekday(name: "Sunday",    weekday: 1, blockColor: UIColor(red: 214/255, green: 210/255, blue: 255/255, alpha: 1), routines: [], bIsToday: Bool(today == 1)))
         globalRoutineWeekdays = weekdays
         sharedUserDefaults.set(true, forKey: userDefaultsSecondLaunch)
+        save()
     }
     
 }
