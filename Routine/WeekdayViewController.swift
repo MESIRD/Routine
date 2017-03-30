@@ -81,8 +81,9 @@ class WeekdayViewController: UIViewController, UITableViewDelegate, UITableViewD
         tableView!.register(WeekdayAddOneTableViewCell.self, forCellReuseIdentifier: kWeekdayAddOneCellId)
         backView!.addSubview(tableView!)
         
-        blurView = UIVisualEffectView(frame: UIScreen.main.bounds)
-        blurView!.effect = UIBlurEffect(style: .dark)
+        let blurEffect = UIBlurEffect(style: .dark)
+        blurView = UIVisualEffectView(effect: blurEffect)
+        blurView!.frame = UIScreen.main.bounds
         blurView!.alpha = 0
         backView!.addSubview(blurView!)
         

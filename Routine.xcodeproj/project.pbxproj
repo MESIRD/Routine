@@ -19,8 +19,6 @@
 		D750B66A1E84287E00941AB4 /* MainViewControllerAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D750B6691E84287E00941AB4 /* MainViewControllerAnimator.swift */; };
 		D7735A811E8C0C8A00AA573C /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7735A801E8C0C8A00AA573C /* ToastView.swift */; };
 		D7735A841E8C193D00AA573C /* PushAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7735A831E8C193D00AA573C /* PushAlertView.swift */; };
-		D7735A881E8C24F900AA573C /* RoutineWeekday.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7735A871E8C24F900AA573C /* RoutineWeekday.swift */; };
-		D7735A891E8C24F900AA573C /* RoutineWeekday.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7735A871E8C24F900AA573C /* RoutineWeekday.swift */; };
 		D77CB6441E80306B00CD242E /* RoutineEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D77CB6431E80306B00CD242E /* RoutineEditViewController.swift */; };
 		D77F8D2A1E7EE340006577A6 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D72546861E7EDC0F00E8E6FE /* NotificationCenter.framework */; };
 		D798454C1E86349D00A34C36 /* MainTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D798454B1E86349D00A34C36 /* MainTableView.swift */; };
@@ -28,6 +26,17 @@
 		D79845501E864FC300A34C36 /* WeekdayColorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D798454F1E864FC300A34C36 /* WeekdayColorTableViewCell.swift */; };
 		D79845521E86506B00A34C36 /* WeekdaySelectTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D79845511E86506B00A34C36 /* WeekdaySelectTableViewCell.swift */; };
 		D79845561E86576000A34C36 /* WeekdayRoutineTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D79845551E86576000A34C36 /* WeekdayRoutineTableViewCell.swift */; };
+		D7A0095B1E8D3A2600EE2FAF /* RoutineStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A0095A1E8D3A2600EE2FAF /* RoutineStorage.swift */; };
+		D7A0095C1E8D3A2600EE2FAF /* RoutineStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A0095A1E8D3A2600EE2FAF /* RoutineStorage.swift */; };
+		D7A0095F1E8D3A9300EE2FAF /* DateTimeUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A0095E1E8D3A9300EE2FAF /* DateTimeUtil.swift */; };
+		D7A009601E8D3A9300EE2FAF /* DateTimeUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A0095E1E8D3A9300EE2FAF /* DateTimeUtil.swift */; };
+		D7A009621E8D405200EE2FAF /* ColorUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A009611E8D405200EE2FAF /* ColorUtil.swift */; };
+		D7A009631E8D405200EE2FAF /* ColorUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A009611E8D405200EE2FAF /* ColorUtil.swift */; };
+		D7A009651E8D407200EE2FAF /* StringUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A009641E8D407200EE2FAF /* StringUtil.swift */; };
+		D7A009661E8D407200EE2FAF /* StringUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A009641E8D407200EE2FAF /* StringUtil.swift */; };
+		D7A009681E8D408A00EE2FAF /* NotificationUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A009671E8D408A00EE2FAF /* NotificationUtil.swift */; };
+		D7A0096B1E8D432A00EE2FAF /* RoutineWeekday.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A0096A1E8D432A00EE2FAF /* RoutineWeekday.swift */; };
+		D7A0096C1E8D432A00EE2FAF /* RoutineWeekday.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A0096A1E8D432A00EE2FAF /* RoutineWeekday.swift */; };
 		D7A3150A1E802CE300145249 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D725466B1E7EB25C00E8E6FE /* Main.storyboard */; };
 		D7A3150B1E802CE300145249 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D72546701E7EB25C00E8E6FE /* LaunchScreen.storyboard */; };
 		D7B302A81E87912100819796 /* RoutineTimeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B302A71E87912100819796 /* RoutineTimeTableViewCell.swift */; };
@@ -83,7 +92,6 @@
 		D750B6691E84287E00941AB4 /* MainViewControllerAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewControllerAnimator.swift; sourceTree = "<group>"; };
 		D7735A801E8C0C8A00AA573C /* ToastView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
 		D7735A831E8C193D00AA573C /* PushAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushAlertView.swift; sourceTree = "<group>"; };
-		D7735A871E8C24F900AA573C /* RoutineWeekday.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutineWeekday.swift; sourceTree = "<group>"; };
 		D77CB6431E80306B00CD242E /* RoutineEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutineEditViewController.swift; sourceTree = "<group>"; };
 		D77F8D2B1E7EE367006577A6 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		D77F8D2D1E7EE44A006577A6 /* Routine.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Routine.entitlements; sourceTree = "<group>"; };
@@ -93,6 +101,12 @@
 		D798454F1E864FC300A34C36 /* WeekdayColorTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeekdayColorTableViewCell.swift; sourceTree = "<group>"; };
 		D79845511E86506B00A34C36 /* WeekdaySelectTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeekdaySelectTableViewCell.swift; sourceTree = "<group>"; };
 		D79845551E86576000A34C36 /* WeekdayRoutineTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeekdayRoutineTableViewCell.swift; sourceTree = "<group>"; };
+		D7A0095A1E8D3A2600EE2FAF /* RoutineStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutineStorage.swift; sourceTree = "<group>"; };
+		D7A0095E1E8D3A9300EE2FAF /* DateTimeUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateTimeUtil.swift; sourceTree = "<group>"; };
+		D7A009611E8D405200EE2FAF /* ColorUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorUtil.swift; sourceTree = "<group>"; };
+		D7A009641E8D407200EE2FAF /* StringUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringUtil.swift; sourceTree = "<group>"; };
+		D7A009671E8D408A00EE2FAF /* NotificationUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationUtil.swift; sourceTree = "<group>"; };
+		D7A0096A1E8D432A00EE2FAF /* RoutineWeekday.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutineWeekday.swift; sourceTree = "<group>"; };
 		D7B302A71E87912100819796 /* RoutineTimeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutineTimeTableViewCell.swift; sourceTree = "<group>"; };
 		D7B302A91E87927600819796 /* RoutineTextTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutineTextTableViewCell.swift; sourceTree = "<group>"; };
 		D7B302AB1E87938C00819796 /* RoutineSelectTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutineSelectTableViewCell.swift; sourceTree = "<group>"; };
@@ -146,6 +160,7 @@
 				D7B302AE1E87AC5F00819796 /* Controller */,
 				D7B302AF1E87AC6D00819796 /* View */,
 				D7B302B01E87AC7100819796 /* Model */,
+				D7A0095D1E8D3A7A00EE2FAF /* Utilities */,
 				D7B302B11E87ACB500819796 /* Supporting Files */,
 			);
 			path = Routine;
@@ -168,6 +183,18 @@
 				D725468E1E7EDC0F00E8E6FE /* Info.plist */,
 			);
 			path = TodayRoutine;
+			sourceTree = "<group>";
+		};
+		D7A0095D1E8D3A7A00EE2FAF /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				D7A0095A1E8D3A2600EE2FAF /* RoutineStorage.swift */,
+				D7A0095E1E8D3A9300EE2FAF /* DateTimeUtil.swift */,
+				D7A009611E8D405200EE2FAF /* ColorUtil.swift */,
+				D7A009641E8D407200EE2FAF /* StringUtil.swift */,
+				D7A009671E8D408A00EE2FAF /* NotificationUtil.swift */,
+			);
+			name = Utilities;
 			sourceTree = "<group>";
 		};
 		D7B302AE1E87AC5F00819796 /* Controller */ = {
@@ -206,7 +233,7 @@
 			isa = PBXGroup;
 			children = (
 				D750B6691E84287E00941AB4 /* MainViewControllerAnimator.swift */,
-				D7735A871E8C24F900AA573C /* RoutineWeekday.swift */,
+				D7A0096A1E8D432A00EE2FAF /* RoutineWeekday.swift */,
 				F558761C1E84DC4700A4AB7F /* Routine.swift */,
 			);
 			name = Model;
@@ -350,23 +377,28 @@
 				D725467F1E7ECB9F00E8E6FE /* Prefix.swift in Sources */,
 				D7DD96CE1E86D1E1003BABAE /* WeekdayColorSelectCollectionViewCell.swift in Sources */,
 				D750B66A1E84287E00941AB4 /* MainViewControllerAnimator.swift in Sources */,
+				D7A009681E8D408A00EE2FAF /* NotificationUtil.swift in Sources */,
 				D7735A811E8C0C8A00AA573C /* ToastView.swift in Sources */,
-				D7735A881E8C24F900AA573C /* RoutineWeekday.swift in Sources */,
 				D7B302AC1E87938C00819796 /* RoutineSelectTableViewCell.swift in Sources */,
 				D7B302A81E87912100819796 /* RoutineTimeTableViewCell.swift in Sources */,
+				D7A0095F1E8D3A9300EE2FAF /* DateTimeUtil.swift in Sources */,
 				D77CB6441E80306B00CD242E /* RoutineEditViewController.swift in Sources */,
 				D72546681E7EB25C00E8E6FE /* AppDelegate.swift in Sources */,
 				D798454C1E86349D00A34C36 /* MainTableView.swift in Sources */,
 				D798454E1E864C0E00A34C36 /* WeekdayTextTableViewCell.swift in Sources */,
 				D7B302AA1E87927600819796 /* RoutineTextTableViewCell.swift in Sources */,
 				D750B6621E8412DC00941AB4 /* MainTableViewCell.swift in Sources */,
+				D7A009621E8D405200EE2FAF /* ColorUtil.swift in Sources */,
 				D7735A841E8C193D00AA573C /* PushAlertView.swift in Sources */,
+				D7A0096B1E8D432A00EE2FAF /* RoutineWeekday.swift in Sources */,
 				D7DD96C81E86BCFB003BABAE /* WeekdayAddOneTableViewCell.swift in Sources */,
+				D7A0095B1E8D3A2600EE2FAF /* RoutineStorage.swift in Sources */,
 				D750B6681E84271A00941AB4 /* WeekdayViewController.swift in Sources */,
 				D7DD96CC1E86C72A003BABAE /* WeekdayColorSelectView.swift in Sources */,
 				D79845561E86576000A34C36 /* WeekdayRoutineTableViewCell.swift in Sources */,
 				D750B6601E8411A500941AB4 /* MainViewController.swift in Sources */,
 				D79845501E864FC300A34C36 /* WeekdayColorTableViewCell.swift in Sources */,
+				D7A009651E8D407200EE2FAF /* StringUtil.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -374,8 +406,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D7A009601E8D3A9300EE2FAF /* DateTimeUtil.swift in Sources */,
 				F558761E1E84DC4700A4AB7F /* Routine.swift in Sources */,
-				D7735A891E8C24F900AA573C /* RoutineWeekday.swift in Sources */,
+				D7A009661E8D407200EE2FAF /* StringUtil.swift in Sources */,
+				D7A009631E8D405200EE2FAF /* ColorUtil.swift in Sources */,
+				D7A0095C1E8D3A2600EE2FAF /* RoutineStorage.swift in Sources */,
+				D7A0096C1E8D432A00EE2FAF /* RoutineWeekday.swift in Sources */,
 				D725468A1E7EDC0F00E8E6FE /* TodayViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -515,7 +551,7 @@
 				);
 				GCC_PREFIX_HEADER = $SRCROOT/Routine/Prefix.swift;
 				INFOPLIST_FILE = Routine/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mesird.Routine;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -537,7 +573,7 @@
 				);
 				GCC_PREFIX_HEADER = $SRCROOT/Routine/Prefix.swift;
 				INFOPLIST_FILE = Routine/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mesird.Routine;
 				PRODUCT_NAME = "$(TARGET_NAME)";

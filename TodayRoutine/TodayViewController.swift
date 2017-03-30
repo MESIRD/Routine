@@ -44,15 +44,15 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         default:
             routineWeekday = nil
         }
-        let routines: Array<Routine>? = routineWeekday == nil ? routineWeekday?.routines : nil
+        let routines: Array<Routine>? = routineWeekday != nil ? routineWeekday?.routines : nil
         var routineTitle: String?
         if routines == nil {
             routineTitle = "No plan now"
         } else {
             let now: Date = Date()
             for routine in routines! {
-                let todayStart: Date = _dateFromString(dateText: "\(_todayDate()) \(_timeFromDate(date: routine.start))")
-                let todayEnd: Date = _dateFromString(dateText: "\(_todayDate()) \(_timeFromDate(date: routine.end))")
+                let todayStart: Date = dateFromString(dateText: "\(todayDate()) \(timeFromDate(date: routine.start))")
+                let todayEnd: Date = dateFromString(dateText: "\(todayDate()) \(timeFromDate(date: routine.end))")
                 if todayStart < now && todayEnd > now {
                     routineTitle = routine.name
                     break
@@ -86,49 +86,6 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         // If there's an update, use NCUpdateResult.NewData
         
         completionHandler(NCUpdateResult.newData)
-    }
-    
-    // functions
-    func _todayDate() -> String {
-        let dateFormatter: DateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        return dateFormatter.string(from: Date())
-    }
-    
-    func _dateFromString(dateText: String) -> Date {
-        let dateFormatter: DateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd hh:mm"
-        return dateFormatter.date(from: dateText)!
-    }
-    
-    func _timeFromDate(date: Date) -> String {
-        let dateFormatter: DateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "hh:mm"
-        return dateFormatter.string(from: date)
-    }
-    
-    func weekdayForToday() -> Int {
-        let calendar = Calendar.current
-        let components = calendar.component(.weekday, from: Date())
-        return components + 1
-    }
-    
-    let appGroupId = "group.com.mesird.Routine"
-    let userDefaultsRoutineWeekdays = "UserDefaultsRoutineWeekdays"
-    
-    func read() -> [RoutineWeekday] {
-        let sharedUserDefaults: UserDefaults = UserDefaults(suiteName: appGroupId)!
-        let tempRoutineWeekdays: Array<Data>? = sharedUserDefaults.object(forKey: userDefaultsRoutineWeekdays) as? Array<Data>
-        if tempRoutineWeekdays != nil {
-            var routineWeekdays: Array<RoutineWeekday> = []
-            for data in tempRoutineWeekdays! {
-                let routineWeekday = NSKeyedUnarchiver.unarchiveObject(with: data) as! RoutineWeekday
-                routineWeekdays.append(routineWeekday)
-            }
-            return routineWeekdays
-        } else {
-            return []
-        }
     }
     
 }

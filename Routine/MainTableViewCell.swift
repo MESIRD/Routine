@@ -8,12 +8,15 @@
 
 import UIKit
 
+
 class MainTableViewCell: UITableViewCell {
     
     var backView: UIView?
     var titleLabel: UILabel?
     var detailLabel: UILabel?
     var bellView: UIImageView?
+    
+    var feedbackGenerator: UIImpactFeedbackGenerator?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -31,18 +34,20 @@ class MainTableViewCell: UITableViewCell {
         
         titleLabel = UILabel(frame: CGRect(x: 15, y: 17, width: screenWidth - 60, height: 26))
         titleLabel!.font = UIFont.systemFont(ofSize: 24, weight: UIFontWeightLight)
-        titleLabel!.textColor = UIColor(red: 136/255, green: 136/255, blue: 136/255, alpha: 1)
+        titleLabel!.textColor = color(with: 136, green: 136, blue: 136)
         backView!.addSubview(titleLabel!)
         
         detailLabel = UILabel(frame: CGRect(x: 15, y: 24, width: screenWidth - 60, height: 17))
         detailLabel!.font = UIFont.systemFont(ofSize: 15, weight: UIFontWeightLight)
-        detailLabel!.textColor = UIColor(red: 136/255, green: 136/255, blue: 136/255, alpha: 1)
+        detailLabel!.textColor = color(with: 136, green: 136, blue: 136)
         detailLabel!.textAlignment = NSTextAlignment.right
         backView!.addSubview(detailLabel!)
         
         bellView = UIImageView(frame: CGRect(x: 0, y: 20, width: 20, height: 20))
         bellView!.image = UIImage.init(named: "bell")
         backView?.addSubview(bellView!)
+        
+        feedbackGenerator = UIImpactFeedbackGenerator(style: .light)
     }
     
     override func layoutSubviews() {
@@ -60,17 +65,9 @@ class MainTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    
-    func _tapOnBackView(gestureRecognizer: UITapGestureRecognizer) {
-        if gestureRecognizer.state == UIGestureRecognizerState.began {
-            self.displayPressAnimation()
-        } else if gestureRecognizer.state == UIGestureRecognizerState.ended {
-            self.displayReleaseAnimation()
-        }
-    }
-    
 
     func displayPressAnimation() {
+        self.feedbackGenerator!.impactOccurred()
         UIView.animate(withDuration: 0.1) {
             self.backView?.alpha = 0.8
             self.backView?.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)

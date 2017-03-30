@@ -55,7 +55,7 @@ class MainViewControllerAnimator: NSObject, UIViewControllerAnimatedTransitionin
             
             // first animation
             toVC?.view.alpha = 0
-            UIView.animate(withDuration: 0.2, animations: {
+            UIView.animate(withDuration: 0.3, animations: {
                 toVC?.view.alpha = 1
                 blackView.alpha = 0.5
                 fromVC?.view.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
@@ -67,13 +67,15 @@ class MainViewControllerAnimator: NSObject, UIViewControllerAnimatedTransitionin
             // dismiss current view controller
             containerView.addSubview((toVC?.view)!)
             containerView.bringSubview(toFront: (fromVC?.view)!)
+            fromVC?.view.layer.cornerRadius = 10
+            fromVC?.view.layer.masksToBounds = true
             UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut, animations: {
                 fromVC?.view.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
             }, completion: { (finished: Bool) in
                 var fromVCFrame = fromVC?.view.frame
                 fromVCFrame?.origin.y = screenHeight
                 let maskView = toVC?.view.viewWithTag(101)
-                UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseInOut, animations: {
+                UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: {
                     fromVC?.view.frame = fromVCFrame!
                     maskView?.alpha = 0
                 }, completion: { (finished: Bool) in
