@@ -15,8 +15,11 @@ let userDefaultsSecondLaunch = "UserDefaultsSecondLaunch"
 // persistence
 var globalRoutineWeekdays: Array<RoutineWeekday>?
 
+func clear() {
+    globalRoutineWeekdays = nil
+}
+
 func read() -> [RoutineWeekday] {
-    
     if globalRoutineWeekdays != nil {
         return globalRoutineWeekdays!
     }

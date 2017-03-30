@@ -17,6 +17,7 @@ class WeekdayViewController: UIViewController, UITableViewDelegate, UITableViewD
     var titleLabel: UILabel?
     var blurView: UIVisualEffectView?
     var colorSelectView: WeekdayColorSelectView?
+    var bHasChanges: Bool = false
     
     var routineWeekday: RoutineWeekday?
     
@@ -61,7 +62,7 @@ class WeekdayViewController: UIViewController, UITableViewDelegate, UITableViewD
         backView!.addSubview(doneButton!)
         
         cancelButton = UIButton(frame: CGRect(x: 0, y: 30, width: 80, height: 30))
-        cancelButton!.setTitle("Cancel", for: .normal)
+        cancelButton!.setTitle("Back", for: .normal)
         cancelButton!.setTitleColor(UIColor(red: 98/255, green: 98/255, blue: 98/255, alpha: 1), for: .normal)
         cancelButton!.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: UIFontWeightLight)
         cancelButton!.addTarget(self, action: #selector(self._pressOnCancelButton), for: .touchUpInside)
@@ -107,12 +108,26 @@ class WeekdayViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func _refreshRoutines() {
-        
         routineWeekday = fetchRoutineWeekday(with: (routineWeekday?.id)!)
         tableView!.reloadData()
     }
     
     func _pressOnCancelButton(sender: UIButton) {
+        if bHasChanges {
+            let alertController = UIAlertController(title: "Warning", message: "You have unsaved changes, are your sure to quit without saving?", preferredStyle: .alert)
+            let confirmAction = UIAlertAction(title: "Yes", style: .default, handler: { (action: UIAlertAction) in
+                DispatchQueue.main.async {
+                    self.dismiss(animated: true, completion: nil)
+                }
+            })
+            let cancelAction = UIAlertAction(title: "No", style: .cancel, handler: nil)
+            alertController.addAction(confirmAction)
+            alertController.addAction(cancelAction)
+            DispatchQueue.main.async {
+                self.present(alertController, animated: true, completion: nil)
+            }
+            return
+        }
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -120,7 +135,6 @@ class WeekdayViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         saveRoutineWeekday(routineWeekday: routineWeekday)
         createNotifications(routineWeekday: routineWeekday!)
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: notificationWeekdaySaved), object: nil)
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -311,6 +325,7 @@ class WeekdayViewController: UIViewController, UITableViewDelegate, UITableViewD
         if routineWeekday == nil {
             return
         }
+        bHasChanges = true
         if routineWeekday!.routines == nil {
             routineWeekday!.routines = []
         }
@@ -323,6 +338,7 @@ class WeekdayViewController: UIViewController, UITableViewDelegate, UITableViewD
         if routineWeekday == nil || routineWeekday!.routines == nil {
             return
         }
+        bHasChanges = true
         for i in 0..<routineWeekday!.routines!.count {
             if routineWeekday!.routines![i].id == routine.id {
                 routineWeekday!.routines![i] = routine
@@ -337,6 +353,7 @@ class WeekdayViewController: UIViewController, UITableViewDelegate, UITableViewD
         if routineWeekday == nil {
             return
         }
+        bHasChanges = true
         for i in 0..<routineWeekday!.routines!.count {
             if routineWeekday!.routines![i].id == routine.id {
                 routineWeekday!.routines!.remove(at: i)

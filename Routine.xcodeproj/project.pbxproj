@@ -12,7 +12,6 @@
 		D725466F1E7EB25C00E8E6FE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D725466E1E7EB25C00E8E6FE /* Assets.xcassets */; };
 		D725467F1E7ECB9F00E8E6FE /* Prefix.swift in Sources */ = {isa = PBXBuildFile; fileRef = D725467E1E7ECB9F00E8E6FE /* Prefix.swift */; };
 		D725468A1E7EDC0F00E8E6FE /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72546891E7EDC0F00E8E6FE /* TodayViewController.swift */; };
-		D72546911E7EDC0F00E8E6FE /* TodayRoutine.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = D72546841E7EDC0F00E8E6FE /* TodayRoutine.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		D750B6601E8411A500941AB4 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D750B65F1E8411A500941AB4 /* MainViewController.swift */; };
 		D750B6621E8412DC00941AB4 /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D750B6611E8412DC00941AB4 /* MainTableViewCell.swift */; };
 		D750B6681E84271A00941AB4 /* WeekdayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D750B6671E84271A00941AB4 /* WeekdayViewController.swift */; };
@@ -37,6 +36,7 @@
 		D7A009681E8D408A00EE2FAF /* NotificationUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A009671E8D408A00EE2FAF /* NotificationUtil.swift */; };
 		D7A0096B1E8D432A00EE2FAF /* RoutineWeekday.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A0096A1E8D432A00EE2FAF /* RoutineWeekday.swift */; };
 		D7A0096C1E8D432A00EE2FAF /* RoutineWeekday.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A0096A1E8D432A00EE2FAF /* RoutineWeekday.swift */; };
+		D7A0096E1E8D774D00EE2FAF /* TodayRoutine.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = D72546841E7EDC0F00E8E6FE /* TodayRoutine.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		D7A3150A1E802CE300145249 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D725466B1E7EB25C00E8E6FE /* Main.storyboard */; };
 		D7A3150B1E802CE300145249 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D72546701E7EB25C00E8E6FE /* LaunchScreen.storyboard */; };
 		D7B302A81E87912100819796 /* RoutineTimeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B302A71E87912100819796 /* RoutineTimeTableViewCell.swift */; };
@@ -50,7 +50,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		D725468F1E7EDC0F00E8E6FE /* PBXContainerItemProxy */ = {
+		D7A0096F1E8D774D00EE2FAF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D725465C1E7EB25C00E8E6FE /* Project object */;
 			proxyType = 1;
@@ -60,13 +60,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		D72546951E7EDC0F00E8E6FE /* Embed App Extensions */ = {
+		D7A009711E8D774D00EE2FAF /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				D72546911E7EDC0F00E8E6FE /* TodayRoutine.appex in Embed App Extensions */,
+				D7A0096E1E8D774D00EE2FAF /* TodayRoutine.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -263,12 +263,12 @@
 				D72546601E7EB25C00E8E6FE /* Sources */,
 				D72546611E7EB25C00E8E6FE /* Frameworks */,
 				D72546621E7EB25C00E8E6FE /* Resources */,
-				D72546951E7EDC0F00E8E6FE /* Embed App Extensions */,
+				D7A009711E8D774D00EE2FAF /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				D72546901E7EDC0F00E8E6FE /* PBXTargetDependency */,
+				D7A009701E8D774D00EE2FAF /* PBXTargetDependency */,
 			);
 			name = Routine;
 			productName = Routine;
@@ -282,6 +282,7 @@
 				D72546801E7EDC0F00E8E6FE /* Sources */,
 				D72546811E7EDC0F00E8E6FE /* Frameworks */,
 				D72546821E7EDC0F00E8E6FE /* Resources */,
+				D7A0096D1E8D687400EE2FAF /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -366,6 +367,22 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		D7A0096D1E8D687400EE2FAF /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cd \"${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/\"\nif [[ -d \"Frameworks\" ]]; then\nrm -fr Frameworks\nfi";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		D72546601E7EB25C00E8E6FE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -419,10 +436,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		D72546901E7EDC0F00E8E6FE /* PBXTargetDependency */ = {
+		D7A009701E8D774D00EE2FAF /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = D72546831E7EDC0F00E8E6FE /* TodayRoutine */;
-			targetProxy = D725468F1E7EDC0F00E8E6FE /* PBXContainerItemProxy */;
+			targetProxy = D7A0096F1E8D774D00EE2FAF /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -584,7 +601,7 @@
 		D72546931E7EDC0F00E8E6FE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CODE_SIGN_ENTITLEMENTS = TodayRoutine/TodayRoutine.entitlements;
 				DEVELOPMENT_TEAM = CYRHEAA262;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -594,7 +611,7 @@
 				);
 				INFOPLIST_FILE = TodayRoutine/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../Frameworks @executable_path/../../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mesird.Routine.TodayRoutine;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -605,7 +622,7 @@
 		D72546941E7EDC0F00E8E6FE /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CODE_SIGN_ENTITLEMENTS = TodayRoutine/TodayRoutine.entitlements;
 				DEVELOPMENT_TEAM = CYRHEAA262;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -615,7 +632,7 @@
 				);
 				INFOPLIST_FILE = TodayRoutine/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../Frameworks @executable_path/../../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mesird.Routine.TodayRoutine;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

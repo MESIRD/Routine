@@ -20,6 +20,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view from its nib.
+        clear()
         let weekdays: Array<RoutineWeekday> = read()
         if weekdays.count == 0 {
             return

@@ -16,6 +16,5 @@ let screenHeight: CGFloat = UIScreen.main.bounds.size.height
 let onePixel: CGFloat = 1 / UIScreen.main.scale
 
 // notification
-let notificationWeekdaySaved    = "NotificationWeekdaySaved"
 let notificationRoutineCreated  = "NotificationRoutineCreated"
 let notificationRoutineModified = "NotificationRoutineModified"

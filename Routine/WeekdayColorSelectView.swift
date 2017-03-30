@@ -38,14 +38,14 @@ class WeekdayColorSelectView: UIView, UICollectionViewDelegate, UICollectionView
                   color(with: 210, green: 232, blue: 255),
                   color(with: 214, green: 210, blue: 255),
                   color(with: 249, green: 210, blue: 255),
-                  color(with: 255, green: 178, blue: 139),
-                  color(with: 255, green: 236, blue: 139),
-                  color(with: 219, green: 255, blue: 139),
-                  color(with: 139, green: 255, blue: 161),
-                  color(with: 139, green: 255, blue: 243),
-                  color(with: 139, green: 199, blue: 255),
-                  color(with: 150, green: 139, blue: 255),
-                  color(with: 244, green: 139, blue: 255)]
+                  color(with: 217, green: 182, blue: 164),
+                  color(with: 217, green: 212, blue: 164),
+                  color(with: 196, green: 217, blue: 164),
+                  color(with: 167, green: 217, blue: 164),
+                  color(with: 164, green: 217, blue: 213),
+                  color(with: 164, green: 189, blue: 217),
+                  color(with: 189, green: 164, blue: 217),
+                  color(with: 217, green: 164, blue: 203)]
         
         backView = UIView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: screenHeight))
         backView!.backgroundColor = UIColor(white: 0, alpha: 0.5)

@@ -41,9 +41,12 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView!.tableHeaderView = tableHeaderLabel
         tableView!.register(MainTableViewCell.self, forCellReuseIdentifier: MainViewController.kMainCellId)
         self.view.addSubview(tableView!)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(self._refreshWeekdays), name: NSNotification.Name(rawValue: notificationWeekdaySaved), object: nil)
-        
+        clear()
         self._loadWeekdays()
     }
 
@@ -95,12 +98,8 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     //MARK: - Private Method
     
     func _loadWeekdays() {
-        weekdays = globalRoutineWeekdays
-        tableView!.reloadData()
-    }
-    
-    func _refreshWeekdays() {
-        self._loadWeekdays()
+        weekdays = read()
+        tableView!.reloadSections(IndexSet.init(integer: 0), with: .automatic)
     }
     
     //MARK: - UIViewControllerTransitioningDelegate

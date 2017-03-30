@@ -76,7 +76,7 @@ class RoutineEditViewController: UIViewController, UITableViewDelegate, UITableV
         backView!.addSubview(doneButton!)
         
         cancelButton = UIButton(frame: CGRect(x: 0, y: 30, width: 80, height: 30))
-        cancelButton!.setTitle("Cancel", for: .normal)
+        cancelButton!.setTitle("Back", for: .normal)
         cancelButton!.setTitleColor(UIColor(red: 98/255, green: 98/255, blue: 98/255, alpha: 1), for: .normal)
         cancelButton!.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: UIFontWeightLight)
         cancelButton!.addTarget(self, action: #selector(self._pressOnCancelButton), for: .touchUpInside)
@@ -274,7 +274,9 @@ class RoutineEditViewController: UIViewController, UITableViewDelegate, UITableV
                 let cancelAction = UIAlertAction(title: "No", style: .cancel, handler: nil)
                 alertController.addAction(confirmAction)
                 alertController.addAction(cancelAction)
-                self.present(alertController, animated: true, completion: nil)
+                DispatchQueue.main.async {
+                    self.present(alertController, animated: true, completion: nil)
+                }
             }
         }
     }
