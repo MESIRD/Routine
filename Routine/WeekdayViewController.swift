@@ -51,18 +51,18 @@ class WeekdayViewController: UIViewController, UITableViewDelegate, UITableViewD
         titleLabel!.textColor = color(with: 98, green: 98, blue: 98)
         titleLabel!.font = UIFont.systemFont(ofSize: 22, weight: UIFontWeightLight)
         titleLabel!.textAlignment = .center
-        titleLabel!.text = routineWeekday?.name
+        titleLabel!.text = routineWeekday?.localizedName
         backView!.addSubview(titleLabel!)
         
         doneButton = UIButton(frame: CGRect(x: screenWidth - 80, y: 30, width: 80, height: 30))
-        doneButton!.setTitle("Done", for: .normal)
+        doneButton!.setTitle(NSLocalizedString("NavigationDoneText", comment: ""), for: .normal)
         doneButton!.setTitleColor(UIColor(red: 98/255, green: 98/255, blue: 98/255, alpha: 1), for: .normal)
         doneButton!.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: UIFontWeightLight)
         doneButton!.addTarget(self, action: #selector(self._pressOnDoneButton), for: .touchUpInside)
         backView!.addSubview(doneButton!)
         
         cancelButton = UIButton(frame: CGRect(x: 0, y: 30, width: 80, height: 30))
-        cancelButton!.setTitle("Back", for: .normal)
+        cancelButton!.setTitle(NSLocalizedString("NavigationBackText", comment: ""), for: .normal)
         cancelButton!.setTitleColor(UIColor(red: 98/255, green: 98/255, blue: 98/255, alpha: 1), for: .normal)
         cancelButton!.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: UIFontWeightLight)
         cancelButton!.addTarget(self, action: #selector(self._pressOnCancelButton), for: .touchUpInside)
@@ -114,13 +114,13 @@ class WeekdayViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func _pressOnCancelButton(sender: UIButton) {
         if bHasChanges {
-            let alertController = UIAlertController(title: "Warning", message: "You have unsaved changes, are your sure to quit without saving?", preferredStyle: .alert)
-            let confirmAction = UIAlertAction(title: "Yes", style: .default, handler: { (action: UIAlertAction) in
+            let alertController = UIAlertController(title: NSLocalizedString("AlertWarningText", comment: ""), message: NSLocalizedString("AlertUnsavedChangesText", comment: ""), preferredStyle: .alert)
+            let confirmAction = UIAlertAction(title: NSLocalizedString("AlertConfirmText", comment: ""), style: .default, handler: { (action: UIAlertAction) in
                 DispatchQueue.main.async {
                     self.dismiss(animated: true, completion: nil)
                 }
             })
-            let cancelAction = UIAlertAction(title: "No", style: .cancel, handler: nil)
+            let cancelAction = UIAlertAction(title: NSLocalizedString("AlertCancelText", comment: ""), style: .cancel, handler: nil)
             alertController.addAction(confirmAction)
             alertController.addAction(cancelAction)
             DispatchQueue.main.async {
@@ -132,7 +132,6 @@ class WeekdayViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func _pressOnDoneButton(sender: UIButton) {
-        
         saveRoutineWeekday(routineWeekday: routineWeekday)
         createNotifications(routineWeekday: routineWeekday!)
         self.dismiss(animated: true, completion: nil)
@@ -140,6 +139,7 @@ class WeekdayViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func _pressOnSwitcher(sender: UISwitch) {
         routineWeekday?.bNeedNotification = sender.isOn
+        bHasChanges = true
         tableView?.reloadSections([1], with: .automatic)
     }
     
@@ -164,7 +164,7 @@ class WeekdayViewController: UIViewController, UITableViewDelegate, UITableViewD
             if indexPath.row == 0 {
                 let cell: WeekdayColorTableViewCell = tableView.dequeueReusableCell(withIdentifier: kWeekdayColorCellId) as! WeekdayColorTableViewCell
                 cell.selectionStyle = .none
-                cell.titleLabel?.text = "Block Color"
+                cell.titleLabel?.text = NSLocalizedString("WeekdayBlockColorText", comment: "")
                 cell.colorView?.backgroundColor = routineWeekday?.blockColor ?? UIColor.lightGray
                 let line = UIView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: onePixel))
                 line.backgroundColor = color(with: 231, green: 231, blue: 231)
@@ -173,7 +173,7 @@ class WeekdayViewController: UIViewController, UITableViewDelegate, UITableViewD
             } else if indexPath.row == 1 {
                 let cell: WeekdaySelectTableViewCell = tableView.dequeueReusableCell(withIdentifier: kWeekdaySelectCellId) as! WeekdaySelectTableViewCell
                 cell.selectionStyle = .none
-                cell.titleLabel?.text = "Need Notification"
+                cell.titleLabel?.text = NSLocalizedString("WeekdayNeedNotificationText", comment: "")
                 cell.switcher?.isOn = routineWeekday?.bNeedNotification ?? false
                 cell.switcher?.addTarget(self, action: #selector(self._pressOnSwitcher), for: .valueChanged)
                 if routineWeekday?.blockColor != nil {
@@ -221,9 +221,9 @@ class WeekdayViewController: UIViewController, UITableViewDelegate, UITableViewD
         titleLabel.font = UIFont.boldSystemFont(ofSize: 14)
         titleLabel.textColor = color(with: 175, green: 175, blue: 175)
         if section == 0 {
-            titleLabel.text = "Basics"
+            titleLabel.text = NSLocalizedString("WeekdayBasicSectionText", comment: "")
         } else {
-            titleLabel.text = "Routines"
+            titleLabel.text = NSLocalizedString("WeekdayRoutinesSectionText", comment: "")
         }
         header.addSubview(titleLabel)
         return header
@@ -287,7 +287,6 @@ class WeekdayViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func didSelect(color: UIColor) {
-        
         routineWeekday?.blockColor = color
         DispatchQueue.main.async {
             UIView.animate(withDuration: 0.3, animations: {
@@ -298,7 +297,6 @@ class WeekdayViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func didTapOnBackView() {
-        
         DispatchQueue.main.async {
             UIView.animate(withDuration: 0.3, animations: {
                 self.blurView!.alpha = 0
@@ -321,7 +319,6 @@ class WeekdayViewController: UIViewController, UITableViewDelegate, UITableViewD
     //MARK: - RoutineEditProtocol
     
     func didCreateRoutine(routine: Routine) {
-        
         if routineWeekday == nil {
             return
         }
@@ -334,7 +331,6 @@ class WeekdayViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func didModifyRoutine(routine: Routine) {
-        
         if routineWeekday == nil || routineWeekday!.routines == nil {
             return
         }
@@ -349,7 +345,6 @@ class WeekdayViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func didDeleteRoutine(routine: Routine) {
-        
         if routineWeekday == nil {
             return
         }

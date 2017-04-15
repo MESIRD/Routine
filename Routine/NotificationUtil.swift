@@ -39,7 +39,7 @@ func scheduleLocalNotification(routine: Routine, routineWeekday: RoutineWeekday)
     localNotification.fireDate = fireDate
     localNotification.timeZone = NSTimeZone.default
     localNotification.repeatInterval = NSCalendar.Unit.weekOfYear
-    localNotification.soundName = UILocalNotificationDefaultSoundName
+    localNotification.soundName = "bell.wav"
     localNotification.alertBody = "Time for '\(routine.name)'"
     localNotification.applicationIconBadgeNumber = 1
     localNotification.userInfo = ["identifier": routine.id, "weekdayId": routineWeekday.id!]

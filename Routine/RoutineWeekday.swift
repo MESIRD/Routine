@@ -12,6 +12,11 @@ class RoutineWeekday: NSObject, NSCoding {
     
     var id: String?
     var name: String?
+    var localizedName: String {
+        get {
+            return NSLocalizedString(self.name!, comment: "")
+        }
+    }
     var weekday: Int?
     var blockColor: UIColor?
     var routines: Array<Routine>?

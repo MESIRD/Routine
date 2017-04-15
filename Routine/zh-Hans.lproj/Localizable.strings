@@ -1,0 +1,47 @@
+/* 
+  Localizable.strings
+  Routine
+
+  Created by mesird on 15/04/2017.
+  Copyright © 2017 mesird. All rights reserved.
+*/
+
+"buttonTitleGotIt" = "了解";
+
+"HomeTitleText" = "星期";
+"HomeItemRoutineText" = "日常";
+
+"Monday"    = "星期一";
+"Tuesday"   = "星期二";
+"Wednesday" = "星期三";
+"Thursday"  = "星期四";
+"Friday"    = "星期五";
+"Saturday"  = "星期六";
+"Sunday"    = "星期天";
+
+"NavigationDoneText" = "完成";
+"NavigationBackText" = "返回";
+"ColorsTitle" = "颜色";
+"WeekdayBlockColorText" = "块色";
+"WeekdayNeedNotificationText" = "是否提醒";
+"WeekdayAddRoutineText" = "创建新日常";
+"WeekdayBasicSectionText" = "基础";
+"WeekdayRoutinesSectionText" = "日常";
+"RoutineTitleText" = "日常";
+"RoutineAddRoutineText" = "创建日常";
+"RoutineEditRoutineText" = "编辑日常";
+"RoutineNamePlaceholderText" = "输入日常名称";
+"RoutineTimeStartText" = "起始时间";
+"RoutineTimeEndText" = "结束时间";
+"RoutineNeedNotificationText" = "是否提醒";
+"RoutineNameSectionText" = "日常名称";
+"RoutineTimeSectionText" = "持续时间";
+"RoutineAdditionalText" = "其他";
+"RoutineNameRequiredText" = "请输入日常名称";
+"RoutineTimeValidationText" = "起始时间不得晚于结束时间";
+"RoutineDeleteText" = "删除";
+"AlertWarningText" = "提示";
+"AlertUnsavedChangesText" = "还有未保存数据，确定要返回？";
+"AlertConfirmText" = "确定";
+"AlertCancelText" = "取消";
+"AlertDeleteText" = "确认要删除吗？";

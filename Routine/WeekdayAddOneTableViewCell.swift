@@ -42,7 +42,7 @@ class WeekdayAddOneTableViewCell: UITableViewCell {
         titleLabel!.textColor = UIColor(red: 175/255, green: 175/255, blue: 175/255, alpha: 1)
         titleLabel!.font = UIFont.systemFont(ofSize: 15, weight: UIFontWeightLight)
         titleLabel!.textAlignment = .center
-        titleLabel!.text = "Add new routine"
+        titleLabel!.text = NSLocalizedString("WeekdayAddRoutineText", comment: "")
         backView!.addSubview(titleLabel!)
     }
     

@@ -56,7 +56,7 @@ class WeekdayColorSelectView: UIView, UICollectionViewDelegate, UICollectionView
         titleLabel = UILabel(frame: CGRect(x: 0, y: 80, width: screenWidth, height: 30))
         titleLabel!.textColor = UIColor.white
         titleLabel!.font = UIFont.systemFont(ofSize: 30, weight: UIFontWeightLight)
-        titleLabel!.text = "Colors"
+        titleLabel!.text = NSLocalizedString("ColorsTitle", comment: "")
         titleLabel!.alpha = 0
         titleLabel!.textAlignment = .center
         self.addSubview(titleLabel!)

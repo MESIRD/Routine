@@ -65,18 +65,18 @@ class RoutineEditViewController: UIViewController, UITableViewDelegate, UITableV
         titleLabel!.textColor = color(with: 98, green: 98, blue: 98)
         titleLabel!.font = UIFont.systemFont(ofSize: 22, weight: UIFontWeightLight)
         titleLabel!.textAlignment = .center
-        titleLabel!.text = "Routine"
+        titleLabel!.text = NSLocalizedString("RoutineTitleText", comment: "")
         backView!.addSubview(titleLabel!)
         
         doneButton = UIButton(frame: CGRect(x: screenWidth - 80, y: 30, width: 80, height: 30))
-        doneButton!.setTitle("Done", for: .normal)
+        doneButton!.setTitle(NSLocalizedString("NavigationDoneText", comment: ""), for: .normal)
         doneButton!.setTitleColor(UIColor(red: 98/255, green: 98/255, blue: 98/255, alpha: 1), for: .normal)
         doneButton!.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: UIFontWeightLight)
         doneButton!.addTarget(self, action: #selector(self._pressOnDoneButton), for: .touchUpInside)
         backView!.addSubview(doneButton!)
         
         cancelButton = UIButton(frame: CGRect(x: 0, y: 30, width: 80, height: 30))
-        cancelButton!.setTitle("Back", for: .normal)
+        cancelButton!.setTitle(NSLocalizedString("NavigationBackText", comment: ""), for: .normal)
         cancelButton!.setTitleColor(UIColor(red: 98/255, green: 98/255, blue: 98/255, alpha: 1), for: .normal)
         cancelButton!.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: UIFontWeightLight)
         cancelButton!.addTarget(self, action: #selector(self._pressOnCancelButton), for: .touchUpInside)
@@ -101,9 +101,9 @@ class RoutineEditViewController: UIViewController, UITableViewDelegate, UITableV
         }
         
         if routineEditType == .add {
-            title = "Add routine"
+            titleLabel!.text = NSLocalizedString("RoutineAddRoutineText", comment: "")
         } else {
-            title = "Edit routine"
+            titleLabel!.text = NSLocalizedString("RoutineEditRoutineText", comment: "")
         }
         
         datePickerBackView = UIView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: screenHeight))
@@ -142,12 +142,12 @@ class RoutineEditViewController: UIViewController, UITableViewDelegate, UITableV
     func _pressOnDoneButton(sender: UIButton) {
         
         if routineNameField?.text?.characters.count == 0 {
-            ToastView(title: "Please enter routine name").show(inSeconds: 1.5)
+            ToastView(title: NSLocalizedString("RoutineNameRequiredText", comment: "")).show(inSeconds: 1.5)
             return
         }
         
         if (routine?.start)! > (routine?.end)! {
-            ToastView(title: "Start time larger than end time").show(inSeconds: 1.5)
+            ToastView(title: NSLocalizedString("RoutineTimeValidationText", comment: "")).show(inSeconds: 1.5)
             return
         }
         
@@ -191,7 +191,7 @@ class RoutineEditViewController: UIViewController, UITableViewDelegate, UITableV
             cell.selectionStyle = .none
             let nameField = cell.textField
             nameField?.text = routine?.name
-            nameField?.placeholder = "Input routine name here"
+            nameField?.placeholder = NSLocalizedString("RoutineNamePlaceholderText", comment: "")
             nameField?.delegate = self
             routineNameField = nameField
             return cell
@@ -200,21 +200,21 @@ class RoutineEditViewController: UIViewController, UITableViewDelegate, UITableV
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat = "hh:mm"
                 let cell: RoutineTimeTableViewCell = tableView.dequeueReusableCell(withIdentifier: kRoutineTimeCellId) as! RoutineTimeTableViewCell
-                cell.titleLabel?.text = "Start Time"
+                cell.titleLabel?.text = NSLocalizedString("RoutineTimeStartText", comment: "")
                 cell.detailLabel?.text = dateFormatter.string(from: routine!.start)
                 return cell
             } else {
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat = "hh:mm"
                 let cell: RoutineTimeTableViewCell = tableView.dequeueReusableCell(withIdentifier: kRoutineTimeCellId) as! RoutineTimeTableViewCell
-                cell.titleLabel?.text = "End Time"
+                cell.titleLabel?.text = NSLocalizedString("RoutineTimeEndText", comment: "")
                 cell.detailLabel?.text = dateFormatter.string(from: routine!.end)
                 return cell
             }
         } else if indexPath.section == 2 {
             let cell: RoutineSelectTableViewCell = tableView.dequeueReusableCell(withIdentifier: kRoutineSelectCellId) as! RoutineSelectTableViewCell
             cell.selectionStyle = .none
-            cell.titleLabel?.text = "Need Notification"
+            cell.titleLabel?.text = NSLocalizedString("RoutineNeedNotificationText", comment: "")
             cell.switcher?.isOn = routine!.needNotification
             if switcherColor != nil {
                 cell.switcher?.onTintColor = switcherColor!
@@ -240,11 +240,11 @@ class RoutineEditViewController: UIViewController, UITableViewDelegate, UITableV
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         if section == 0 {
-            return self._headerView(with: "Routine name")
+            return self._headerView(with: NSLocalizedString("RoutineNameSectionText", comment: ""))
         } else if section == 1 {
-            return self._headerView(with: "Time duration")
+            return self._headerView(with: NSLocalizedString("RoutineTimeSectionText", comment: ""))
         } else if section == 2 {
-            return self._headerView(with: "Additional")
+            return self._headerView(with: NSLocalizedString("RoutineAdditionalText", comment: ""))
         }
         return UIView()
     }
@@ -263,15 +263,15 @@ class RoutineEditViewController: UIViewController, UITableViewDelegate, UITableV
         } else if indexPath.section == 3 {
             if indexPath.row == 0 {
                 // delete
-                let alertController = UIAlertController(title: "Warning", message: "Are you sure to delete this routine?", preferredStyle: .alert)
-                let confirmAction = UIAlertAction(title: "Yes", style: .default, handler: { (action: UIAlertAction) in
+                let alertController = UIAlertController(title: NSLocalizedString("AlertWarningText", comment: ""), message: NSLocalizedString("AlertDeleteText", comment: ""), preferredStyle: .alert)
+                let confirmAction = UIAlertAction(title: NSLocalizedString("AlertConfirmText", comment: ""), style: .default, handler: { (action: UIAlertAction) in
                     // delete routine and pop
                     if self.delegate != nil {
                         self.delegate!.didDeleteRoutine(routine: self.routine!)
                     }
                     self.dismiss(animated: true, completion: nil)
                 })
-                let cancelAction = UIAlertAction(title: "No", style: .cancel, handler: nil)
+                let cancelAction = UIAlertAction(title: NSLocalizedString("AlertCancelText", comment: ""), style: .cancel, handler: nil)
                 alertController.addAction(confirmAction)
                 alertController.addAction(cancelAction)
                 DispatchQueue.main.async {

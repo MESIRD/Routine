@@ -1,0 +1,47 @@
+/* 
+  Localizable.strings
+  Routine
+
+  Created by mesird on 15/04/2017.
+  Copyright © 2017 mesird. All rights reserved.
+*/
+
+"buttonTitleGotIt" = "Got it";
+
+"HomeTitleText" = "Weekdays";
+"HomeItemRoutineText" = "routines";
+
+"Monday"    = "Monday";
+"Tuesday"   = "Tuesday";
+"Wednesday" = "Wednesday";
+"Thursday"  = "Thursday";
+"Friday"    = "Friday";
+"Saturday"  = "Saturday";
+"Sunday"    = "Sunday";
+
+"NavigationDoneText" = "Done";
+"NavigationBackText" = "Back";
+"ColorsTitle" = "Colors";
+"WeekdayBlockColorText" = "Block Color";
+"WeekdayNeedNotificationText" = "Need Notification";
+"WeekdayAddRoutineText" = "Create New Routine";
+"WeekdayBasicSectionText" = "Basic";
+"WeekdayRoutinesSectionText" = "Routines";
+"RoutineTitleText" = "Routine";
+"RoutineAddRoutineText" = "New Routine";
+"RoutineEditRoutineText" = "Edit Routine";
+"RoutineNamePlaceholderText" = "Input routine name here";
+"RoutineTimeStartText" = "Start Time";
+"RoutineTimeEndText" = "End Time";
+"RoutineNeedNotificationText" = "Need Notification";
+"RoutineNameSectionText" = "Routine Name";
+"RoutineTimeSectionText" = "Time duration";
+"RoutineAdditionalText" = "Additional";
+"RoutineNameRequiredText" = "Please input routine name";
+"RoutineTimeValidationText" = "Start time should be earlier than end time";
+"RoutineDeleteText" = "Delete";
+"AlertWarningText" = "Warning";
+"AlertUnsavedChangesText" = "You have unsaved changes, are your sure to quit without saving?";
+"AlertConfirmText" = "Yes";
+"AlertCancelText" = "No";
+"AlertDeleteText" = "Are you sure to delete?";

@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         // increase loading time
-//        Thread.sleep(forTimeInterval: 1)
+        Thread.sleep(forTimeInterval: 1)
         
         // app initialization
         self._initAppData()
@@ -94,6 +94,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         weekdays.append(RoutineWeekday(name: "Sunday",    weekday: 1, blockColor: UIColor(red: 214/255, green: 210/255, blue: 255/255, alpha: 1), routines: [], bIsToday: Bool(today == 1)))
         globalRoutineWeekdays = weekdays
         sharedUserDefaults.set(true, forKey: userDefaultsSecondLaunch)
+        UIApplication.shared.cancelAllLocalNotifications()
         save()
     }
     

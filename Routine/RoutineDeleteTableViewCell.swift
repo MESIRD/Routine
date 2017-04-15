@@ -28,7 +28,7 @@ class RoutineDeleteTableViewCell: UITableViewCell {
         
         titleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 45))
         titleLabel!.font = UIFont.systemFont(ofSize: 17, weight: UIFontWeightLight)
-        titleLabel!.text = "Delete"
+        titleLabel!.text = NSLocalizedString("RoutineDeleteText", comment: "")
         titleLabel!.textColor = color(with: 255, green: 35, blue: 62)
         titleLabel!.textAlignment = .center
         self.contentView.addSubview(titleLabel!)

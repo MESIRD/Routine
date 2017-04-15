@@ -11,45 +11,55 @@ import UIKit
 class PushAlertView: UIView {
     
     var backView: UIView?
-    var bellView: UIImageView?
+    var iconsView: UIImageView?
     var titleLabel: UILabel?
     var weekdayLabel: UILabel?
     var timeLabel: UILabel?
+    var confirmButton: UIButton?
 
     init(routine: Routine, weekday: RoutineWeekday) {
         super.init(frame: CGRect(x: 0, y: 0, width: screenWidth, height: screenHeight))
         self.backgroundColor = UIColor(white: 0, alpha: 0.5)
         
-        backView = UIView(frame: CGRect(x: 0, y: 0, width: 260, height: 100))
+        backView = UIView(frame: CGRect(x: 0, y: 0, width: 280, height: 280))
         backView!.center = CGPoint(x: screenWidth / 2, y: screenHeight / 2)
-        backView!.layer.cornerRadius = 10
+        backView!.layer.cornerRadius = 6
         backView!.layer.masksToBounds = true
         backView!.backgroundColor = UIColor.white
         self.addSubview(backView!)
         
-        bellView = UIImageView(frame: CGRect(x: 15, y: 10, width: 20, height: 20))
-        bellView!.image = UIImage.init(named: "bell")
-        backView!.addSubview(bellView!)
+        iconsView = UIImageView(frame: CGRect(x: 0, y: 0, width: 280, height: 280))
+        iconsView!.image = UIImage.init(named: "alert_bg_icons")
+        backView!.addSubview(iconsView!)
         
-        titleLabel = UILabel(frame: CGRect(x: 15, y: 35, width: 230, height: 28))
+        titleLabel = UILabel(frame: CGRect(x: 50, y: 56, width: 178, height: 56))
         titleLabel!.textColor = color(with: 98, green: 98, blue: 98)
         titleLabel!.font = UIFont.boldSystemFont(ofSize: 20)
         titleLabel!.textAlignment = .center
+        titleLabel!.numberOfLines = 0
         titleLabel!.text = routine.name
         backView!.addSubview(titleLabel!)
         
-        weekdayLabel = UILabel(frame: CGRect(x: 15, y: 78, width: 230, height: 17))
+        weekdayLabel = UILabel(frame: CGRect(x: 50, y: 112, width: 178, height: 17))
         weekdayLabel!.textColor = color(with: 175, green: 175, blue: 175)
         weekdayLabel!.font = UIFont.systemFont(ofSize: 12, weight: UIFontWeightLight)
-        weekdayLabel!.text = weekday.name
+        weekdayLabel!.text = weekday.localizedName
+        weekdayLabel!.textAlignment = .center
         backView!.addSubview(weekdayLabel!)
         
-        timeLabel = UILabel(frame: CGRect(x: 15, y: 78, width: 230, height: 17))
+        timeLabel = UILabel(frame: CGRect(x:50, y: 129, width: 178, height: 17))
         timeLabel!.textColor = color(with: 175, green: 175, blue: 175)
         timeLabel!.font = UIFont.systemFont(ofSize: 12, weight: UIFontWeightLight)
-        timeLabel!.textAlignment = .right
+        timeLabel!.textAlignment = .center
         timeLabel!.text = "\(timeFromDate(date: routine.start)) - \(timeFromDate(date: routine.end))"
         backView!.addSubview(timeLabel!)
+        
+        confirmButton = UIButton(frame: CGRect(x: 61, y: 171, width: 160, height: 40))
+        confirmButton!.layer.cornerRadius = 20
+        confirmButton!.backgroundColor = color(with: 245, green: 147, blue: 35)
+        confirmButton!.setTitle(NSLocalizedString("buttonTitleGotIt", comment: ""), for: .normal)
+        confirmButton!.addTarget(self, action: #selector(self.hide), for: .touchUpInside)
+        backView!.addSubview(confirmButton!)
         
         self.alpha = 0
         backView!.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)

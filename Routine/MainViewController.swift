@@ -31,7 +31,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         let tableHeaderLabel = UILabel(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 120))
         tableHeaderLabel.textColor = UIColor(red: 98/255, green: 98/255, blue: 98/255, alpha: 1)
         tableHeaderLabel.font = UIFont.systemFont(ofSize: 24, weight: UIFontWeightLight)
-        tableHeaderLabel.text = "Weekdays"
+        tableHeaderLabel.text = NSLocalizedString("HomeTitleText", comment: "")
         tableHeaderLabel.textAlignment = .center
         
         tableView = MainTableView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: screenHeight) , style: UITableViewStyle.plain)
@@ -69,8 +69,8 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         let routineWeekday = weekdays![indexPath.row]
         let cell: MainTableViewCell = tableView.dequeueReusableCell(withIdentifier: MainViewController.kMainCellId) as! MainTableViewCell
         cell.selectionStyle = UITableViewCellSelectionStyle.none
-        cell.titleLabel?.text = routineWeekday.name
-        cell.detailLabel?.text = "\(routineWeekday.routines!.count) routines"
+        cell.titleLabel?.text = routineWeekday.localizedName
+        cell.detailLabel?.text = "\(routineWeekday.routines!.count) \(NSLocalizedString("HomeItemRoutineText", comment: ""))"
         cell.backView?.backgroundColor = routineWeekday.blockColor
         cell.bellView?.isHidden = !routineWeekday.bNeedNotification!
         cell.layoutSubviews()

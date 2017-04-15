@@ -8,15 +8,12 @@
 
 import UIKit
 
-
 class MainTableViewCell: UITableViewCell {
     
     var backView: UIView?
     var titleLabel: UILabel?
     var detailLabel: UILabel?
     var bellView: UIImageView?
-    
-    var feedbackGenerator: UIImpactFeedbackGenerator?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -46,8 +43,6 @@ class MainTableViewCell: UITableViewCell {
         bellView = UIImageView(frame: CGRect(x: 0, y: 20, width: 20, height: 20))
         bellView!.image = UIImage.init(named: "bell")
         backView?.addSubview(bellView!)
-        
-        feedbackGenerator = UIImpactFeedbackGenerator(style: .light)
     }
     
     override func layoutSubviews() {
@@ -67,7 +62,6 @@ class MainTableViewCell: UITableViewCell {
     }
 
     func displayPressAnimation() {
-        self.feedbackGenerator!.impactOccurred()
         UIView.animate(withDuration: 0.1) {
             self.backView?.alpha = 0.8
             self.backView?.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
