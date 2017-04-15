@@ -45,3 +45,6 @@
 "AlertConfirmText" = "确定";
 "AlertCancelText" = "取消";
 "AlertDeleteText" = "确认要删除吗？";
+
+// Today extension
+"ExtNoPlanNow" = "暂无日常";

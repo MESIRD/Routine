@@ -16,14 +16,55 @@ let screenHeight: CGFloat = UIScreen.main.bounds.size.height
 class TodayViewController: UIViewController, NCWidgetProviding {
     
     var titleLabel: UILabel?
+    var timeLabel: UILabel?
         
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view from its nib.
+        let currentRoutine: Routine? = self._getCurrentRoutine()
+        
+        titleLabel = UILabel(frame: CGRect(x: 10, y: 19, width: screenWidth - 40, height: 48))
+        titleLabel!.textAlignment = NSTextAlignment.center
+        titleLabel!.font = UIFont.systemFont(ofSize: 17, weight: UIFontWeightLight)
+        titleLabel!.numberOfLines = 0
+        self.view.addSubview(titleLabel!)
+        if currentRoutine != nil {
+            titleLabel!.text = currentRoutine?.name
+            titleLabel!.textColor = color(with: 55, green: 55, blue: 55)
+            
+            timeLabel = UILabel(frame: CGRect(x: 10, y: 67, width: screenWidth - 40, height: 18))
+            timeLabel!.textAlignment = .center
+            timeLabel!.textColor = color(with: 98, green: 98, blue: 98)
+            timeLabel!.text = "\(timeFromDate(date: (currentRoutine?.start)!)) - \(timeFromDate(date: (currentRoutine?.end)!))"
+            timeLabel!.font = UIFont.systemFont(ofSize: 13, weight: UIFontWeightLight)
+            self.view.addSubview(timeLabel!)
+        } else {
+            titleLabel!.text = NSLocalizedString("ExtNoPlanNow", comment: "")
+            titleLabel!.textColor = UIColor.white
+        }
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
+        // Perform any setup necessary in order to update the view.
+        
+        // If an error is encountered, use NCUpdateResult.Failed
+        // If there's no update required, use NCUpdateResult.NoData
+        // If there's an update, use NCUpdateResult.NewData
+        
+        completionHandler(NCUpdateResult.newData)
+    }
+    
+    func _getCurrentRoutine() -> Routine? {
         clear()
+        
         let weekdays: Array<RoutineWeekday> = read()
         if weekdays.count == 0 {
-            return
+            return nil
         }
         let todayWeekday: Int = weekdayForToday()
         var routineWeekday: RoutineWeekday?
@@ -46,47 +87,20 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             routineWeekday = nil
         }
         let routines: Array<Routine>? = routineWeekday != nil ? routineWeekday?.routines : nil
-        var routineTitle: String?
-        if routines == nil {
-            routineTitle = "No plan now"
-        } else {
+        var currentRoutine: Routine? = nil
+        if routines != nil {
             let now: Date = Date()
             for routine in routines! {
                 let todayStart: Date = dateFromString(dateText: "\(todayDate()) \(timeFromDate(date: routine.start))")
                 let todayEnd: Date = dateFromString(dateText: "\(todayDate()) \(timeFromDate(date: routine.end))")
                 if todayStart < now && todayEnd > now {
-                    routineTitle = routine.name
+                    currentRoutine = routine
                     break
                 }
             }
         }
         
-        titleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: screenWidth - 20, height: 90))
-        titleLabel?.textAlignment = NSTextAlignment.center
-        if routineTitle != nil {
-            titleLabel?.text = routineTitle
-            titleLabel?.textColor = UIColor.darkGray
-        } else {
-            titleLabel?.text = "No plan now"
-            titleLabel?.textColor = UIColor.white
-        }
-        titleLabel?.font = UIFont.systemFont(ofSize: 30, weight: UIFontWeightLight)
-        self.view.addSubview(titleLabel!)
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
-        // Perform any setup necessary in order to update the view.
-        
-        // If an error is encountered, use NCUpdateResult.Failed
-        // If there's no update required, use NCUpdateResult.NoData
-        // If there's an update, use NCUpdateResult.NewData
-        
-        completionHandler(NCUpdateResult.newData)
+        return currentRoutine
     }
     
 }

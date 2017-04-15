@@ -45,3 +45,6 @@
 "AlertConfirmText" = "Yes";
 "AlertCancelText" = "No";
 "AlertDeleteText" = "Are you sure to delete?";
+
+// Today extension
+"ExtNoPlanNow" = "No routine now";

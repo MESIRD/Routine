@@ -40,7 +40,7 @@ class WeekdayRoutineTableViewCell: UITableViewCell {
         backView!.layer.masksToBounds = true
         self.addSubview(backView!)
         
-        titleLabel = UILabel(frame: CGRect(x: 15, y: 6, width: screenWidth - 60, height: 21))
+        titleLabel = UILabel(frame: CGRect(x: 15, y: 6, width: screenWidth - 80, height: 21))
         titleLabel!.textColor = UIColor(red: 98/255, green: 98/255, blue: 98/255, alpha: 1)
         titleLabel!.font = UIFont.systemFont(ofSize: 15, weight: UIFontWeightLight)
         backView!.addSubview(titleLabel!)

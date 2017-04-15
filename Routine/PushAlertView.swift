@@ -56,7 +56,7 @@ class PushAlertView: UIView {
         
         confirmButton = UIButton(frame: CGRect(x: 61, y: 171, width: 160, height: 40))
         confirmButton!.layer.cornerRadius = 20
-        confirmButton!.backgroundColor = color(with: 245, green: 147, blue: 35)
+        confirmButton!.backgroundColor = color(with: 255, green: 180, blue: 102)
         confirmButton!.setTitle(NSLocalizedString("buttonTitleGotIt", comment: ""), for: .normal)
         confirmButton!.addTarget(self, action: #selector(self.hide), for: .touchUpInside)
         backView!.addSubview(confirmButton!)
